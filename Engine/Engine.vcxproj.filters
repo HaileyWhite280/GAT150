@@ -67,7 +67,10 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Renderer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Renderer.h">
       <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Source Files\Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

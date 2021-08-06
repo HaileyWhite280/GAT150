@@ -1,6 +1,8 @@
 #pragma once
 //#include "Audio/AudioSystem.h"
 #include "Math/Vector2.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
 #include "Math/Color.h"
 #include "Math/Random.h"
 #include "Math/MathUtils.h"
