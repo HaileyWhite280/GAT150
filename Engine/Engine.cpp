@@ -17,19 +17,20 @@ namespace nc
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Shutdown(); });
 	}
 
-	void Engine::Update(float dt)
+	void Engine::Update()
 	{
-		std::for_each(systems.begin(), systems.end(), [dt](auto& system) {system->Update(dt); });
+		time.Tick();
+		std::for_each(systems.begin(), systems.end(), [this](auto& system) {system->Update(time.deltaTime); });
 	}
 
 	void Engine::Draw()
 	{
-		std::for_each(systems.begin(), systems.end(), [](auto& system) mutable
+		/*std::for_each(systems.begin(), systems.end(), [](auto& system) mutable
 			{
 				if (dynamic_cast<GraphicSystem*>(system.get()))
 				{
 					dynamic_cast<GraphicSystem*>(system.get())->Draw();
 				}
-			});
+			});*/
 	}
 }
