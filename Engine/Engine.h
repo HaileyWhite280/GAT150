@@ -1,21 +1,40 @@
 #pragma once
+//systems
 //#include "Audio/AudioSystem.h"
+
+//math
 #include "Math/Vector2.h"
-#include "Graphics/Renderer.h"
-#include "Graphics/Texture.h"
 #include "Math/Color.h"
 #include "Math/Random.h"
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
+
+//graphics
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
+
+//framework
+#include "Framework/System.h"
 #include "Framework/EventSystem.h"
+
+//resource
 #include "Resource/ResourceSystem.h"
+
+//Objects
 #include "Object/Actor.h"
 #include "Object/Scene.h"
+
+//input
+#include "Input/InputSystem.h"
+
+//core
 #include "Core/FileSystem.h"
+
 #include <vector>
 #include <memory>
 #include <algorithm>
-#include <variant>
+
+
 
 namespace nc
 {

@@ -1,6 +1,6 @@
 #include "Renderer.h"
 #include "Texture.h"
-#include "SDL_image.h"
+#include <SDL_image.h>
 #include <iostream>
 
 namespace nc
@@ -48,7 +48,6 @@ namespace nc
 		SDL_RenderPresent(renderer);
 	}
 
-	//Declaration not compatable?
 	void Renderer::Draw(std::shared_ptr<nc::Texture> texture, const Vector2& position, float angle, const Vector2& scale)
 	{
 		Vector2 size = texture->GetSize();
@@ -64,7 +63,7 @@ namespace nc
 		Vector2 size = texture->GetSize();
 		size = size * transform.scale;
 
-		SDL_Rect dest{ (int)transform.position.x, (int)transform.position.y, static_cast<int>(size.x), static_cast<int>(size.y) };
+		SDL_Rect dest{ transform.position.x, transform.position.y, size.x, size.y };
 
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, transform.rotation, nullptr, SDL_FLIP_NONE);
 	}

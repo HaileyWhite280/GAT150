@@ -1,6 +1,6 @@
 #include "Graphics/Texture.h"
 #include "Graphics/Renderer.h"
-#include "SDL_image.h"
+#include <SDL_image.h>
 #include <iostream>
 
 namespace nc

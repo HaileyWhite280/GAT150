@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include <SDL.h>
-#include <SDL_image.h>
+#include <SDL_Image.h>
 #include <iostream>
 
 int main(int, char**)
@@ -16,13 +16,11 @@ int main(int, char**)
 
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		nc::Transform transform{ nc::Vector2{nc::RandomRange(0, 800), nc::RandomRange(0, 600)}, nc::RandomRange(0, 360), 1.0f };
+	for (size_t i = 0; i < 10; i++) {
+		nc::Transform transform{ {nc::RandomRange(0,800),nc::RandomRange(0,600)}, nc::RandomRange(0,360), 0.25f };
 		std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(transform, texture);
 		scene.AddActor(std::move(actor));
 	}
-
 
 	bool quit = false;
 	SDL_Event event;
@@ -37,6 +35,7 @@ int main(int, char**)
 		}
 
 		engine.Update(0);
+		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 		scene.Update(0);
 
 		engine.Get<nc::Renderer>()->BeginFrame();
