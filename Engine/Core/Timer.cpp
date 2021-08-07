@@ -4,8 +4,7 @@ namespace nc
 {
 	Timer::clock_tick_type nc::Timer::ElapsedTicks()
 	{
-		//???
-		clock_duration duration = clock::now - timePoint;
+		clock_duration duration = clock::now() - timePoint;
 		return duration.count();
 	}
 

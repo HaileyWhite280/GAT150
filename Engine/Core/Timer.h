@@ -13,8 +13,7 @@ namespace nc
 	public:
 		Timer() : timePoint{ clock::now() } {}
 
-		//???
-		void Reset() { timePoint = clock::now; }
+		void Reset() { timePoint = clock::now(); }
 		clock_tick_type ElapsedTicks();
 		float ElapsedSeconds();
 
@@ -25,7 +24,7 @@ namespace nc
 	class FrameTimer : public Timer
 	{
 	public:
-		FrameTimer() : frameTimePoint{ clock::now(), startTimePoint{ clock::now() } } {}
+		FrameTimer() : frameTimePoint{ clock::now() }, startTimePoint{ clock::now() } {}
 		void Tick();
 
 	public:
