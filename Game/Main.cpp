@@ -42,9 +42,17 @@ int main(int, char**)
 		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 		scene.Update(engine.time.deltaTime);
 
+		if (engine.Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
+		{
+			nc::Vector2 position = engine.Get<nc::InputSystem>()->GetMousePosition();
+			std::cout << position.x << " " << position.y << std::endl;
+		}
+
 		//std::cout << engine.time.time << std::endl;
-		if (engine.time.time >= quitTime) quit = true;
-		engine.time.timeScale = 0.1f;
+		//if (engine.time.time >= quitTime) quit = true;
+		//engine.time.timeScale = 0.1f;
+
+
 
 		//draw
 		engine.Get<nc::Renderer>()->BeginFrame();
