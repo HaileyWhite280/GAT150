@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/System.h"
-//#include <fmod.hpp>
+#include "AudioChannel.h"
+#include <fmod.hpp>
 #include <string>
 #include <map>
 
@@ -11,12 +12,14 @@ namespace nc
 	public:
 		void Startup();
 		void Shutdown();
+
 		void Update(float dt);
+
 		void AddAudio(const std::string& name, const std::string& filename);
-		void PlayAudio(const std::string& name);
+		AudioChannel PlayAudio(const std::string& name, float volume = 1, float pitch = 1, bool loop = false);
 
 	private:
-		//FMOD::System* fmodSystem;
-		//std::map<std::string, FMOD::Sound*> sounds;
+		FMOD::System* fmodSystem;
+		std::map<std::string, FMOD::Sound*> sounds;
 	};
 }

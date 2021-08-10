@@ -3,6 +3,8 @@
 #include <SDL_Image.h>
 #include <iostream>
 
+//explosion might need to be name changed
+
 int main(int, char**)
 {
 	nc::Timer timer;
@@ -15,6 +17,10 @@ int main(int, char**)
 	scene.engine = &engine;
 
 	nc::SetFilePath("../Resources");
+
+	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
+	engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/music.wav");
+	nc::AudioChannel channel = engine.Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
 
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
 
@@ -48,6 +54,9 @@ int main(int, char**)
 			//std::cout << position.x << " " << position.y << std::endl;
 
 			//create particles
+
+			engine.Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
+			channel.SetPitch(nc::RandomRange(0.2f, 2.0f));
 		}
 
 		//std::cout << engine.time.time << std::endl;
