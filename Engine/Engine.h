@@ -12,6 +12,7 @@
 //graphics
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
+#include "Graphics/ParticleSystems.h"
 
 //framework
 #include "Framework/System.h"
@@ -46,7 +47,7 @@ namespace nc
 		void Shutdown();
 
 		void Update();
-		void Draw();
+		void Draw(Renderer* renderer);
 
 		template<typename T>
 		T* Get();

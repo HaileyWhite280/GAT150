@@ -45,18 +45,20 @@ int main(int, char**)
 		if (engine.Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
 		{
 			nc::Vector2 position = engine.Get<nc::InputSystem>()->GetMousePosition();
-			std::cout << position.x << " " << position.y << std::endl;
+			//std::cout << position.x << " " << position.y << std::endl;
+
+			//create particles
 		}
 
 		//std::cout << engine.time.time << std::endl;
 		//if (engine.time.time >= quitTime) quit = true;
 		//engine.time.timeScale = 0.1f;
 
-
-
 		//draw
 		engine.Get<nc::Renderer>()->BeginFrame();
 		scene.Draw(engine.Get<nc::Renderer>());
+		engine.Draw(engine.Get<nc::Renderer>());
+
 		engine.Get<nc::Renderer>()->EndFrame();
 	}
 
