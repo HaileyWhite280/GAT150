@@ -35,4 +35,11 @@ namespace nc
 
 		return stream;
 	}
+	Color Color::HSVtoRGB(float h, float s, float v)
+	{
+		return Color();
+	}
+	void Color::RGBtoHSV(const Color& color, float& h, float& s, float& v)
+	{
+	}
 }

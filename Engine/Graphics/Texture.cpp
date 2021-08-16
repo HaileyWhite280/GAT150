@@ -1,10 +1,27 @@
-#include "Graphics/Texture.h"
+#include "Texture.h"
 #include "Graphics/Renderer.h"
 #include <SDL_image.h>
 #include <iostream>
 
 namespace nc
 {
+	Texture::Texture(Renderer* renderer)
+	{
+		this->renderer = renderer->renderer;
+	}
+
+	bool Texture::Create(SDL_Surface* surface)
+	{
+		//create texture
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_FreeSurface(surface);
+		if (texture == nullptr)
+		{
+			std::cout << "SDL_CreateTextureFromSurface Error:" << SDL_GetError() << std::endl;
+			return false;
+		}
+		return true;
+	}
 	bool nc::Texture::Load(const std::string& name, void* data)
 	{
 		renderer = static_cast<Renderer*>(data)->renderer;
@@ -17,16 +34,6 @@ namespace nc
 			return false;
 		}
 
-		//create texture
-		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-		SDL_FreeSurface(surface);
-		if (texture == nullptr)
-		{
-			std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
-			return false;
-		}
-
-		return true;
 	}
 
 	Vector2 Texture::GetSize() const

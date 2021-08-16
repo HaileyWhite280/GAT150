@@ -87,6 +87,9 @@
     <ClCompile Include="Audio\AudioChannel.cpp">
       <Filter>Source Files\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Font.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Audio\AudioChannel.h">
       <Filter>Source Files\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Font.h">
+      <Filter>Source Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

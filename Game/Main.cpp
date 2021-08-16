@@ -4,6 +4,7 @@
 #include <iostream>
 
 //explosion might need to be name changed
+//check out GameArt.org
 
 int main(int, char**)
 {
@@ -18,8 +19,11 @@ int main(int, char**)
 
 	nc::SetFilePath("../Resources");
 
-	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
-	engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/music.wav");
+	//add font stuff
+	//engine.Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
+
+	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "explosion.wav");
+	//engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/music.wav");
 	nc::AudioChannel channel = engine.Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
 
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
@@ -32,7 +36,7 @@ int main(int, char**)
 
 	bool quit = false;
 	SDL_Event event;
-	float quitTime = engine.time.time + 3.0f;
+	//float quitTime = engine.time.time + 3.0f;
 
 	while (!quit)
 	{
@@ -43,10 +47,15 @@ int main(int, char**)
 			quit = true;
 			break;
 		}
+
 		//update
 		engine.Update();
-		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 		scene.Update(engine.time.deltaTime);
+
+		if (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
+		{
+			quit = true;
+		}
 
 		if (engine.Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
 		{
@@ -65,8 +74,14 @@ int main(int, char**)
 
 		//draw
 		engine.Get<nc::Renderer>()->BeginFrame();
+
 		scene.Draw(engine.Get<nc::Renderer>());
 		engine.Draw(engine.Get<nc::Renderer>());
+
+		nc::Transform t;
+		t.position = { 30, 30 };
+		//engine.Get<nc::Renderer>()->Draw(textTexture, t);
+
 
 		engine.Get<nc::Renderer>()->EndFrame();
 	}
