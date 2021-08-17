@@ -31,4 +31,5 @@ SDL_Surface* nc::Font::CreateSurface(const std::string& text, const nc::Color& c
         std::cout << "TTF_RenderText_Solid Error:" << SDL_GetError() << std::endl;
     }
     return surface;*/
+    return 0;
 }
