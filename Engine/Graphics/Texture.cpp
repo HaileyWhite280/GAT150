@@ -34,6 +34,16 @@ namespace nc
 			return false;
 		}
 
+		//create texture
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_FreeSurface(surface);
+		if (texture == nullptr)
+		{
+			std::cout << "SDL_CreateTextureFromSurface Error:" << SDL_GetError() << std::endl;
+			return false;
+		}
+		return true;
+
 	}
 
 	Vector2 Texture::GetSize() const

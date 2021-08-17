@@ -5,6 +5,7 @@
 
 //explosion might need to be name changed
 //check out GameArt.org
+//nc::SeedRandom(static_cast<unsigned int>(time(nullptr))); in Game.cpp
 
 int main(int, char**)
 {
@@ -19,11 +20,21 @@ int main(int, char**)
 
 	nc::SetFilePath("../Resources");
 
-	//add font stuff
-	//engine.Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
+	//get font
+	int size = 16;
+	std::shared_ptr<nc::Font> font = engine.Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size);
 
-	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "explosion.wav");
-	//engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/music.wav");
+	//create font
+	std::shared_ptr<nc::Texture> textTexture = std::make_shared<nc::Texture>(engine.Get<nc::Renderer>());
+
+	//set font
+	textTexture->Create(font->CreateSurface("hello wonderful world", nc::Color{ 1, 1, 1 }));
+
+	//add font
+	engine.Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
+
+	engine.Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
+	engine.Get<nc::AudioSystem>()->AddAudio("music", "audio/MarioPaint.wav");
 	nc::AudioChannel channel = engine.Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
 
 	std::shared_ptr<nc::Texture> texture = engine.Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine.Get<nc::Renderer>());
@@ -80,8 +91,7 @@ int main(int, char**)
 
 		nc::Transform t;
 		t.position = { 30, 30 };
-		//engine.Get<nc::Renderer>()->Draw(textTexture, t);
-
+		engine.Get<nc::Renderer>()->Draw(textTexture, t);
 
 		engine.Get<nc::Renderer>()->EndFrame();
 	}

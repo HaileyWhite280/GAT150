@@ -12,7 +12,7 @@
 //graphics
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
-//#include "Graphics/Font.h"
+#include "Graphics/Font.h"
 #include "Graphics/ParticleSystems.h"
 
 //framework
@@ -30,6 +30,7 @@
 #include "Input/InputSystem.h"
 
 //core
+#include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 
