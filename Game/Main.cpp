@@ -2,8 +2,8 @@
 #include <SDL.h>
 #include <SDL_Image.h>
 #include <iostream>
+#include <cassert>
 
-//explosion might need to be name changed
 //check out GameArt.org
 //nc::SeedRandom(static_cast<unsigned int>(time(nullptr))); in Game.cpp
 

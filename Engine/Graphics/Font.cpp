@@ -1,8 +1,9 @@
 #include "Font.h"
+#include <cassert>
 
 nc::Font::~Font()
 {
-    if (font != nullptr)
+    if (font)
     {
         TTF_CloseFont(font);
     }
@@ -10,14 +11,14 @@ nc::Font::~Font()
 
 bool nc::Font::Load(const std::string& name, void* data)
 {
-    font = TTF_OpenFont(name.c_str(), (int)data); //deref pixel size
+    assert(data);
+    font = TTF_OpenFont(name.c_str(), *static_cast<int*>(data));
 
     if (font == nullptr)
     {
         std::cout << "TTF_OpenFont Error:" << TTF_GetError() << std::endl;
         return false;
     }
-
     return true;
 }
 
