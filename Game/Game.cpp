@@ -54,6 +54,7 @@ void Game::Shutdown()
 
 void Game::Update()
 {
+	engine->Update();
 	stateTimer += engine->time.deltaTime;
 
 	switch (state)
@@ -121,9 +122,6 @@ void Game::Update()
 		break;
 	}
 
-	engine->Update();
-	scene->Update(engine->time.deltaTime);
-
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
 	{
 		quit = true;
@@ -140,10 +138,14 @@ void Game::Update()
 		engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
 		musicChannel.SetPitch(nc::RandomRange(0.2f, 2.0f));
 	}
+
+	scene->Update(engine->time.deltaTime);
 }
 
 void Game::Draw()
 {
+	engine->Get<nc::Renderer>()->BeginFrame();
+
 	switch (state)
 	{
 	case Game::eState::Title:
@@ -195,14 +197,12 @@ void Game::Draw()
 	//graphics.DrawString(750, 20, std::to_string(lives).c_str());
 
 	//draw
-	engine->Get<nc::Renderer>()->BeginFrame();
-
-	scene->Draw(engine->Get<nc::Renderer>());
-	engine->Draw(engine->Get<nc::Renderer>());
-
 	nc::Transform t;
 	t.position = { 30, 30 };
 	engine->Get<nc::Renderer>()->Draw(textTexture, t);
+
+	engine->Draw(engine->Get<nc::Renderer>());
+	scene->Draw(engine->Get<nc::Renderer>());
 
 	engine->Get<nc::Renderer>()->EndFrame();
 }
@@ -218,6 +218,7 @@ void Game::UpdateTitle(float dt)
 
 void Game::UpdateLevelStart(float dt)
 {
+	//scene->AddActor(std::make_unique<Player>(nc::Transform(nc::Vector2(400.0f, 300.0f), 0.0f, 1.0f), engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>()), 300.0f));
 		//std::shared_ptr<nc::Shape> shape = std::make_shared<nc::Shape>();
 		//shape->Load("betterPlayer.txt");
 
