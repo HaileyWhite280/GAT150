@@ -36,10 +36,4 @@ namespace nc
 		actor->parent = this;
 		children.push_back(std::move(actor));
 	}
-
-	void Actor::AddComponent(std::unique_ptr<Component> component)
-	{
-		component->owner = this;
-		components.push_back(std::move(component));
-	}
 }

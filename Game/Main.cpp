@@ -1,7 +1,6 @@
 #include "Game.h"
 
 //check out GameArt.org
-//nc::SeedRandom(static_cast<unsigned int>(time(nullptr))); in Game.cpp
 
 int main(int, char**)
 {
