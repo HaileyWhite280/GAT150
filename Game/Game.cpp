@@ -17,8 +17,12 @@ void Game::Initialize()
 	//actors
 	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ {400, 300}, 0, 1 });
 	{
-	nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>();
-	component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("particleBlue.png", engine->Get<nc::Renderer>());
+	nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>();
+	component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particleBlue.png", engine->Get<nc::Renderer>());
+
+	component->fps = 21; //frames to display per second
+	component->numFramesX = 8; //images horizontally
+	component->numFramesY = 8; //images vertically
 	}
 
 	{

@@ -37,6 +37,7 @@
 //components
 #include "Component/SpriteComponent.h"
 #include "Component/PhysicsComponent.h"
+#include "Component/SpriteAnimationComponent.h"
 
 #include <vector>
 #include <memory>
