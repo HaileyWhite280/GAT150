@@ -27,6 +27,8 @@ namespace nc
 
 		void AddChild(std::unique_ptr<Actor> actor);
 
+		void AddComponent(std::unique_ptr<Component> component);
+
 		template<class T>
 		T* AddComponent();
 
@@ -50,6 +52,6 @@ namespace nc
 		component->owner = this;
 		components.push_back(std::move(component));
 
-		return dynamic_cast<T*>(component.back().get());
+		return dynamic_cast<T*>(components.back().get());
 	}
 }

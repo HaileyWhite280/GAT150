@@ -12,6 +12,10 @@ namespace nc
 		systems.push_back(std::make_unique<AudioSystem>());
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
+
+		REGISTER_CLASS(SpriteComponent);
+		//ObjectFactory::Instance().Register<nc::SpriteComponent>("SpriteComponent");
+		//TODO add actor, SpriteAnimationComponent, and PhysicsComponent
 	}
 
 	void Engine::Shutdown()

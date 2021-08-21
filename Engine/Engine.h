@@ -1,4 +1,7 @@
 #pragma once
+#define REGISTER_CLASS(CLASS) ObjectFactory::Instance().Register<CLASS>(#CLASS)
+
+
 //systems
 #include "Audio/AudioSystem.h"
 
@@ -18,6 +21,8 @@
 //framework
 #include "Framework/System.h"
 #include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 //resource
 #include "Resource/ResourceSystem.h"
@@ -47,6 +52,8 @@
 
 namespace nc
 {
+	using ObjectFactory = Singleton<Factory<std::string, Object>>;
+
 	class Engine
 	{
 	public:
