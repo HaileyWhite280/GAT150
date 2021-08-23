@@ -24,11 +24,11 @@ bool nc::Font::Load(const std::string& name, void* data)
 
 SDL_Surface* nc::Font::CreateSurface(const std::string& text, const nc::Color& color)
 {
-    /*SDL_Surface* surface = TTF_RenderText_Solid(TTF_Font, text, color);
+    SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 
     if (surface == nullptr)
     {
         std::cout << "TTF_RenderText_Solid Error:" << SDL_GetError() << std::endl;
     }
-    return surface;*/
+    return surface;
 }
