@@ -46,6 +46,8 @@ private:
 	eState state = eState::Title;
 	float stateTimer = 0.0f;
 
+	//void (Game::* stateFunction)(float) = nullptr;
+
 	size_t score = 0;
 	size_t lives = 0;
 

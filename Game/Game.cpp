@@ -13,34 +13,12 @@ void Game::Initialize()
 
 	nc::SetFilePath("../Resources");
 
-	//get font
-	int size = 16;
-	std::shared_ptr<nc::Font> font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size);
-
-	//create font
-	textTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-
-	//set font
-	textTexture->Create(font->CreateSurface("hello wonderful world", nc::Color{ 1, 1, 1 }));
-
-	//add font
-	engine->Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
-
-	engine->Get<nc::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
-	engine->Get<nc::AudioSystem>()->AddAudio("music", "audio/MarioPaint.wav");
-	musicChannel = engine->Get<nc::AudioSystem>()->PlayAudio("music", 1, 1, true);
-
-	std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>());
-
-	for (size_t i = 0; i < 10; i++) {
-		nc::Transform transform{ {nc::RandomRange(0,800),nc::RandomRange(0,600)}, nc::RandomRange(0,360), 0.25f };
-		std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(transform, texture);
-		scene->AddActor(std::move(actor));
-	}
-
-	//game stuff
-	engine->Get<nc::AudioSystem>()->AddAudio("PlayerShoot", "PlayerShoot.wav");
-	engine->Get<nc::AudioSystem>()->AddAudio("EnemyShoot", "EnemyShoot.wav");
+	//add Sounds
+	engine->Get<nc::AudioSystem>()->AddAudio("explosion", "Audio/explosion.wav");
+	engine->Get<nc::AudioSystem>()->AddAudio("PlayerShoot", "Audio/PlayerShoot.wav");
+	engine->Get<nc::AudioSystem>()->AddAudio("EnemyShoot", "Audio/EnemyShoot.wav");
+	engine->Get<nc::AudioSystem>()->AddAudio("MarioMusic", "Audio/MarioPaint.MP3");
+	musicChannel = engine->Get<nc::AudioSystem>()->PlayAudio("MarioMusic", 1, 1, true);
 
 	engine->Get<nc::EventSystem>()->Subscribe("AddPoints", std::bind(&Game::OnAddPoints, this, std::placeholders::_1));
 	engine->Get<nc::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead, this, std::placeholders::_1));
@@ -127,17 +105,17 @@ void Game::Update()
 		quit = true;
 	}
 
-	if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
-	{
-		nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
-		//std::cout << position.x << " " << position.y << std::endl;
+	//if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Pressed)
+	//{
+	//	nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
+	//	//std::cout << position.x << " " << position.y << std::endl;
 
-		//create particles
+	//	//create particles
 
-		engine->Get<nc::ParticleSystem>()->Create(position, 20, 3, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine->Get<nc::Renderer>()), 100);
-		engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
-		musicChannel.SetPitch(nc::RandomRange(0.2f, 2.0f));
-	}
+	//	//engine->Get<nc::ParticleSystem>()->Create(position, 20, 3, engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("particle01.png", engine->Get<nc::Renderer>()), 100);
+	//	//engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, nc::RandomRange(0.2f, 2.0f));
+	//	//musicChannel.SetPitch(nc::RandomRange(0.2f, 2.0f));
+	//}
 
 	scene->Update(engine->time.deltaTime);
 }
@@ -145,61 +123,176 @@ void Game::Update()
 void Game::Draw()
 {
 	engine->Get<nc::Renderer>()->BeginFrame();
+	std::shared_ptr<nc::Texture> ka1Texture;
+	std::shared_ptr<nc::Texture> operatorTexture;
+
+	int size16 = 16;
+	int size10 = 10;
+
+	nc::Transform t1;
+	nc::Transform t2;
+
+	std::shared_ptr<nc::Font> ka1Font;
+	std::shared_ptr<nc::Font> operatorFont;
 
 	switch (state)
 	{
 	case Game::eState::Title:
-		//graphics.SetColor(nc::Color::red);
-		//graphics.DrawString(300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f), "Centipede(TM)");
+	{
+		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
-		//graphics.SetColor(nc::Color::orange);
-		//graphics.DrawString(290, 400, "Press Tab to Play");
+		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
+
+		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		ka1Texture->Create(ka1Font->CreateSurface("Totally not Tetris", nc::Color::red));
+	}
+
+	{
+		t2.position = { 350, 400 };
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::orange));
+	}
+
+		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
+		engine->Get<nc::ResourceSystem>()->Add("operatorTexture", operatorTexture);
+		engine->Get<nc::Renderer>()->Draw(ka1Texture, t1);
+		engine->Get<nc::Renderer>()->Draw(operatorTexture, t2);
+
 		break;
 	case Game::eState::StartGame:
 		break;
 	case Game::eState::StartLevel1:
-		//graphics.SetColor(nc::Color::orange);
-		//graphics.DrawString(300, 300, "Stage 1");
+	{
+		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
-		//graphics.SetColor(nc::Color::purple);
-		//graphics.DrawString(290, 400, "Press Tab to Play");
+		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
+
+		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		ka1Texture->Create(ka1Font->CreateSurface("Level 1", nc::Color::cyan));
+	}
+
+	{
+		t2.position = { 350, 400 };
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+	}
+
+		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
+		engine->Get<nc::ResourceSystem>()->Add("operatorTexture", operatorTexture);
+		engine->Get<nc::Renderer>()->Draw(ka1Texture, t1);
+		engine->Get<nc::Renderer>()->Draw(operatorTexture, t2);
+
 		break;
 	case Game::eState::StartLevel2:
-		//graphics.SetColor(nc::Color::orange);
-		//graphics.DrawString(300, 300, "Stage 2");
+	{
+		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
-		//graphics.SetColor(nc::Color::purple);
-		//graphics.DrawString(290, 400, "Press Tab to Play");
+		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
+
+		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		ka1Texture->Create(ka1Font->CreateSurface("Level 2", nc::Color::cyan));
+	}
+
+	{
+		t2.position = { 350, 400 };
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+	}
+
+		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
+		engine->Get<nc::ResourceSystem>()->Add("operatorTexture", operatorTexture);
+		engine->Get<nc::Renderer>()->Draw(ka1Texture, t1);
+		engine->Get<nc::Renderer>()->Draw(operatorTexture, t2);
+
 		break;
 	case Game::eState::StartLevelBoss:
-		//graphics.SetColor(nc::Color::orange);
-		//graphics.DrawString(300, 300, "Final Stage");
+	{
+		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
-		//graphics.SetColor(nc::Color::purple);
-		//graphics.DrawString(290, 400, "Press Tab to Play");
+		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
+
+		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		ka1Texture->Create(ka1Font->CreateSurface("Final Level", nc::Color::cyan));
+	}
+
+	{
+		t2.position = { 350, 400 };
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+	}
+
+		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
+		engine->Get<nc::ResourceSystem>()->Add("operatorTexture", operatorTexture);
+		engine->Get<nc::Renderer>()->Draw(ka1Texture, t1);
+		engine->Get<nc::Renderer>()->Draw(operatorTexture, t2);
+
 		break;
 	case Game::eState::Game:
 		break;
 	case Game::eState::GameOver:
-		//scene->RemoveAllActors();
-		//graphics.SetColor(nc::Color::red);
-		//graphics.DrawString(290, 400, "Game Over");
+		scene->RemoveAllActors();
 
-		//graphics.SetColor(nc::Color::cyan);
-		//graphics.DrawString(300, 300, "Press Tab to Play Again");
+		{
+			t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
+
+			ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
+
+			ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+			ka1Texture->Create(ka1Font->CreateSurface("Game Over", nc::Color::red));
+		}
+
+		{
+			t2.position = { 350, 400 };
+
+			operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+			operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+			operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play Again", nc::Color::blue));
+		}
+
+		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
+		engine->Get<nc::ResourceSystem>()->Add("operatorTexture", operatorTexture);
+		engine->Get<nc::Renderer>()->Draw(ka1Texture, t1);
+		engine->Get<nc::Renderer>()->Draw(operatorTexture, t2);
+
 		break;
 	default:
 		break;
 	}
 
-	//graphics.SetColor(nc::Color::white);
-	//graphics.DrawString(30, 20, std::to_string(score).c_str());
-	//graphics.DrawString(750, 20, std::to_string(lives).c_str());
+	{
+		t1.position = { 30,30 };
 
-	//draw
-	nc::Transform t;
-	t.position = { 30, 30 };
-	engine->Get<nc::Renderer>()->Draw(textTexture, t);
+		std::shared_ptr<nc::Texture> scoreTexture;
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		scoreTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		scoreTexture->Create(operatorFont->CreateSurface("Score: " + std::to_string(score), nc::Color::white));
+	}
+
+	{
+		t2.position = { 30,40 };
+
+		std::shared_ptr<nc::Texture> scoreTexture;
+
+		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
+
+		scoreTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		scoreTexture->Create(operatorFont->CreateSurface("Lives: " + std::to_string(lives), nc::Color::white));
+	}
 
 	engine->Draw(engine->Get<nc::Renderer>());
 	scene->Draw(engine->Get<nc::Renderer>());
@@ -209,11 +302,11 @@ void Game::Draw()
 
 void Game::UpdateTitle(float dt)
 {
-	//if (Core::Input::IsPressed(VK_SPACE))
-	//{
-	//	stateFunction = &Game::UpdateLevelStart;
-	//	//state = eState::StartGame;
-	//}
+	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
+	{
+		//stateFunction = &Game::UpdateLevelStart;
+		state = eState::StartGame;
+	}
 }
 
 void Game::UpdateLevelStart(float dt)
