@@ -20,4 +20,7 @@ namespace nc
 
 		SDL_Rect rect;
 	};
+
+	//Read: SpriteComponent::Read(value);
+	//return true;
 }

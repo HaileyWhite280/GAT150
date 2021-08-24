@@ -14,27 +14,34 @@ void Game::Initialize()
 	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	nc::SetFilePath("../Resources");
 
-	//actors
-	std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ {400, 300}, 0, 1 });
-	{
-		auto component = nc::ObjectFactory::Instance().Create<nc::SpriteComponent>("SpriteComponent");
+	rapidjson::Document document;
+	bool success = nc::json::Load("scene.txt", document);
+	assert(success);
+	scene->Read(document);
 
-		//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>();
-		component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particleBlue.png", engine->Get<nc::Renderer>());
+	////actors
+	//std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ {400, 300}, 0, 1 });
+	//{
+	//	auto component = nc::ObjectFactory::Instance().Create<nc::SpriteComponent>("SpriteComponent");
 
-		//component->fps = 21; //frames to display per second
-		//component->numFramesX = 8; //images horizontally
-		//component->numFramesY = 8; //images vertically
+	//	//nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>();
+	//	component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particleBlue.png", engine->Get<nc::Renderer>());
 
-		actor->AddComponent(std::move(component));
-	}
+	//	//component->fps = 21; //frames to display per second
+	//	//component->numFramesX = 8; //images horizontally
+	//	//component->numFramesY = 8; //images vertically
 
-	{
-		//nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>();
-		//component->ApplyForce(nc::Vector2::right * 200);
-	}
+	//TODO do this in json
 
-	scene->AddActor(std::move(actor));
+	//	actor->AddComponent(std::move(component));
+	//}
+
+	//{
+	//	//nc::PhysicsComponent* component = actor->AddComponent<nc::PhysicsComponent>();
+	//	//component->ApplyForce(nc::Vector2::right * 200);
+	//}
+
+	//scene->AddActor(std::move(actor));
 }
 
 void Game::Shutdown()

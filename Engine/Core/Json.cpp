@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 
+//change IsNumber to IsInt/Float
+
 namespace nc
 {
 	namespace json
@@ -24,7 +26,7 @@ namespace nc
 		bool Get(const rapidjson::Value& value, const std::string& name, int& data)
 		{
 			//check if name exists
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsInt() == false)
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false)
 			{
 				return false;
 			}
@@ -38,7 +40,7 @@ namespace nc
 		bool Get(const rapidjson::Value& value, const std::string& name, float& data)
 		{
 			//check if name exists
-			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsFloat() == false)
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false)
 			{
 				return false;
 			}

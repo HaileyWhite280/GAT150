@@ -10,6 +10,8 @@ namespace nc
 		void Update() override;
 		void ApplyForce(const Vector2& force) { acceleration += force; }
 
+		//TODO impliment from Serializable here and in SpriteAnimationComponent and SpriteComponent
+
 	public:
 		Vector2 velocity;
 		Vector2 force;

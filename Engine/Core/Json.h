@@ -3,6 +3,8 @@
 #include "Engine.h"
 #include <string>
 
+#define JSON_READ(value, data) nc::json::Get(value, #data, data);
+
 namespace nc
 {
 	namespace json
