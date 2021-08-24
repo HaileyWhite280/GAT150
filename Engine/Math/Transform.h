@@ -4,6 +4,7 @@
 
 namespace nc
 {
+	//Just Serializable
 	struct Transform : public ISerializable
 	{
 		Vector2 position;
