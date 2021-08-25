@@ -20,6 +20,9 @@ void Game::Initialize()
 	engine->Get<nc::AudioSystem>()->AddAudio("MarioMusic", "Audio/MarioPaint.MP3");
 	musicChannel = engine->Get<nc::AudioSystem>()->PlayAudio("MarioMusic", 1, 1, true);
 
+	//add texture
+	std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>());
+
 	engine->Get<nc::EventSystem>()->Subscribe("AddPoints", std::bind(&Game::OnAddPoints, this, std::placeholders::_1));
 	engine->Get<nc::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead, this, std::placeholders::_1));
 }
@@ -166,7 +169,7 @@ void Game::Draw()
 		break;
 	case Game::eState::StartLevel1:
 	{
-		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
+		t1.position = { 350, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
 		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
