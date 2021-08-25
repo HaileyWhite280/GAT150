@@ -4,7 +4,6 @@
 //check out GameArt.org
 //TODO Do Game Port and JSON
 //data() json.h
-//float operator [] (size_t index) const {return (&r)[index];} float& operator [] (size_t index) {return (&r)[index];}  in Color.h after r= b= c=
 
 int main(int, char**)
 {

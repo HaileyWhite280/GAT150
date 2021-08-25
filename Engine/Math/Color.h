@@ -18,7 +18,7 @@ namespace nc
 		}
 
 		float operator [] (size_t index) const { return (&r)[index]; }
-		float operator [] (size_t index) { return (&r)[index]; }
+		float& operator [] (size_t index) { return (&r)[index]; }
 
 		void Set(float r, float g, float b) { this->r = r, this->g = g, this->b = b; }
 
