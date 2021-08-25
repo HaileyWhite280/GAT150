@@ -29,7 +29,7 @@ void Enemy::Update(float dt)
 
 			nc::Transform t = transform;
 			t.scale = 0.5;
-			scene->AddActor(std::make_unique<Projectiles>(t, texture, 600.0f));
+			//scene->AddActor(std::make_unique<Projectiles>(t, texture, 600.0f));
 
 			scene->engine->Get<nc::AudioSystem>()->PlayAudio("EnemyShoot");
 

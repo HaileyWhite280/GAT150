@@ -4,7 +4,7 @@
 class Enemy : public nc::Actor
 {
 public:
-	//Enemy(const nc::Transform& transform, float speed) : nc::Actor{ transform, shape }, speed{ speed } {}
+	Enemy(const nc::Transform& transform, std::shared_ptr<nc::Texture> texture, float speed) : nc::Actor{ transform, texture }, speed{ speed } {}
 
 	void Update(float dt) override;
 	void OnCollision(Actor* actor) override;

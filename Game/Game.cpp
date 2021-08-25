@@ -1,4 +1,7 @@
 #include "Game.h"
+#include "Actors/Enemy.h"
+#include "Actors/Player.h"
+#include "Actors/Projectiles.h"
 
 void Game::Initialize()
 {
@@ -21,7 +24,7 @@ void Game::Initialize()
 	musicChannel = engine->Get<nc::AudioSystem>()->PlayAudio("MarioMusic", 1, 1, true);
 
 	//add texture
-	std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>());
+	//std::shared_ptr<nc::Texture> texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>());
 
 	engine->Get<nc::EventSystem>()->Subscribe("AddPoints", std::bind(&Game::OnAddPoints, this, std::placeholders::_1));
 	engine->Get<nc::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead, this, std::placeholders::_1));
@@ -79,10 +82,10 @@ void Game::Update()
 
 		break;
 	case Game::eState::Game:
-		//if (scene->GetActors<Enemy>().size() == 0)
-		//{
-		//	state = eState::StartLevel1;
-		//}
+		if (scene->GetActors<Enemy>().size() == 0)
+		{
+			state = eState::StartLevel1;
+		}
 		break;
 	case Game::eState::PlayLevel1:
 		//if (scene->GetActors<Enemy>().size() == 0) state = eState::StartLevel2;
@@ -147,7 +150,7 @@ void Game::Draw()
 		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
 		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		ka1Texture->Create(ka1Font->CreateSurface("Totally not Tetris", nc::Color::red));
+		ka1Texture->Create(ka1Font->CreateSurface("Sierra Mist", nc::Color::red));
 	}
 
 	{
@@ -174,7 +177,7 @@ void Game::Draw()
 		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
 		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		ka1Texture->Create(ka1Font->CreateSurface("Level 1", nc::Color::cyan));
+		ka1Texture->Create(ka1Font->CreateSurface("Level 1", nc::Color::green));
 	}
 
 	{
@@ -183,7 +186,7 @@ void Game::Draw()
 		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
 
 		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::yellow));
 	}
 
 		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
@@ -194,12 +197,12 @@ void Game::Draw()
 		break;
 	case Game::eState::StartLevel2:
 	{
-		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
+		t1.position = { 350, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
 		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
 		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		ka1Texture->Create(ka1Font->CreateSurface("Level 2", nc::Color::cyan));
+		ka1Texture->Create(ka1Font->CreateSurface("Level 2", nc::Color::green));
 	}
 
 	{
@@ -208,7 +211,7 @@ void Game::Draw()
 		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
 
 		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::yellow));
 	}
 
 		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
@@ -219,12 +222,12 @@ void Game::Draw()
 		break;
 	case Game::eState::StartLevelBoss:
 	{
-		t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
+		t1.position = { 350, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
 		ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
 		ka1Texture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		ka1Texture->Create(ka1Font->CreateSurface("Final Level", nc::Color::cyan));
+		ka1Texture->Create(ka1Font->CreateSurface("Final Level", nc::Color::green));
 	}
 
 	{
@@ -233,7 +236,7 @@ void Game::Draw()
 		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
 
 		operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::blue));
+		operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play", nc::Color::yellow));
 	}
 
 		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
@@ -248,7 +251,7 @@ void Game::Draw()
 		scene->RemoveAllActors();
 
 		{
-			t1.position = { 300, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
+			t1.position = { 350, 300 + static_cast<int>(std::sin(stateTimer * 5.0f) * 15.0f) };
 
 			ka1Font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/ka1.ttf", &size16);
 
@@ -262,7 +265,7 @@ void Game::Draw()
 			operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
 
 			operatorTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-			operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play Again", nc::Color::blue));
+			operatorTexture->Create(operatorFont->CreateSurface("Press TAB to Play Again", nc::Color::yellow));
 		}
 
 		engine->Get<nc::ResourceSystem>()->Add("ka1Texture", ka1Texture);
@@ -275,8 +278,7 @@ void Game::Draw()
 		break;
 	}
 
-	{
-		t1.position = { 30,30 };
+		t1.position = { 30, 20 };
 
 		std::shared_ptr<nc::Texture> scoreTexture;
 
@@ -284,18 +286,15 @@ void Game::Draw()
 
 		scoreTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 		scoreTexture->Create(operatorFont->CreateSurface("Score: " + std::to_string(score), nc::Color::white));
-	}
 
-	{
-		t2.position = { 30,40 };
+		t2.position = { 750, 20 };
 
-		std::shared_ptr<nc::Texture> scoreTexture;
+		std::shared_ptr<nc::Texture> livesTexture;
 
 		operatorFont = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("fonts/8bitOperatorPlus8-Bold.ttf", &size10);
 
-		scoreTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		scoreTexture->Create(operatorFont->CreateSurface("Lives: " + std::to_string(lives), nc::Color::white));
-	}
+		livesTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		livesTexture->Create(operatorFont->CreateSurface("Lives: " + std::to_string(lives), nc::Color::white));
 
 	engine->Draw(engine->Get<nc::Renderer>());
 	scene->Draw(engine->Get<nc::Renderer>());
@@ -307,66 +306,52 @@ void Game::UpdateTitle(float dt)
 {
 	if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
 	{
-		//stateFunction = &Game::UpdateLevelStart;
-		state = eState::StartGame;
+		&Game::UpdateLevelStart;
 	}
 }
 
 void Game::UpdateLevelStart(float dt)
 {
-	//scene->AddActor(std::make_unique<Player>(nc::Transform(nc::Vector2(400.0f, 300.0f), 0.0f, 1.0f), engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sf2.png", engine->Get<nc::Renderer>()), 300.0f));
-		//std::shared_ptr<nc::Shape> shape = std::make_shared<nc::Shape>();
-		//shape->Load("betterPlayer.txt");
+	//fix rotation
+	std::shared_ptr<nc::Texture> playerTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Player.png", engine->Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> enemyTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Enemy.png", engine->Get<nc::Renderer>());
 
-		//std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 5}, {-5, -5} };
-		//std::shared_ptr<nc::Shape> shape1 = std::make_shared<nc::Shape>(points, nc::Color{ 17, 16, 25 });
-		//std::shared_ptr<nc::Shape> shape2 = std::make_shared<nc::Shape>(points, nc::Color{ 1, 1, 0 });
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400.0f, 300.0f}, 0.0f, 0.075f }, playerTexture, 300.0f));
 
-
-		//scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, shape, 300)); // engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("player.txt")
-
-		//for (size_t i = 0; i < 3; i++)
-		//{
-		//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0, 800), nc::RandomRange(0,300)}, nc::RandomRange(0, nc::TwoPi), 2 }, shape2, 30));
-		//}
+	for (size_t i = 0; i < 3; i++)
+	{
+		//scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0,800), nc::RandomRange(0, 300)}, nc::RandomRange(0, nc::TwoPi), 0.025f }, enemyTexture, 30));
+	}
 }
 
 void Game::UpdateLevel2Start(float dt)
 {
-	//std::shared_ptr<nc::Shape> shape = std::make_shared<nc::Shape>();
-	//shape->Load("betterPlayer.txt");
+	//fix rotation
+	std::shared_ptr<nc::Texture> playerTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Player.png", engine->Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> enemyTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Enemy.png", engine->Get<nc::Renderer>());
 
-	//std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 5}, {-5, -5} };
-	//std::shared_ptr<nc::Shape> shape1 = std::make_shared<nc::Shape>(points, nc::Color{ 17, 16, 25 });
-	//std::shared_ptr<nc::Shape> shape2 = std::make_shared<nc::Shape>(points, nc::Color{ 1, 1, 0 });
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400.0f, 300.0f}, 0.0f, 0.075f }, playerTexture, 300.0f));
 
-
-	////scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, shape, 300)); // engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("player.txt")
-
-	//for (size_t i = 0; i < 5; i++)
-	//{
-	//	//add harder enemies
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0, 800), nc::RandomRange(0,300)}, nc::RandomRange(0, nc::TwoPi), 2 }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("betterEnemy.txt"), 150));
-	//}
+	for (size_t i = 0; i < 5; i++)
+	{
+		//add harder enemies
+		//scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0,800), nc::RandomRange(0, 300)}, nc::RandomRange(0, nc::TwoPi), 0.025f }, enemyTexture, 150));
+	}
 }
 
 void Game::UpdateLevelBossStart(float dt)
 {
-	//std::shared_ptr<nc::Shape> shape = std::make_shared<nc::Shape>();
-	//shape->Load("betterPlayer.txt");
+	//fix rotation
+	std::shared_ptr<nc::Texture> playerTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Player.png", engine->Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> enemyTexture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/Enemy.png", engine->Get<nc::Renderer>());
 
-	//std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 5}, {-5, -5} };
-	//std::shared_ptr<nc::Shape> shape1 = std::make_shared<nc::Shape>(points, nc::Color{ 17, 16, 25 });
-	//std::shared_ptr<nc::Shape> shape2 = std::make_shared<nc::Shape>(points, nc::Color{ 1, 1, 0 });
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400.0f, 300.0f}, 0.0f, 0.075f }, playerTexture, 300.0f));
 
-
-	////scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 3 }, shape, 300));
-
-	//for (size_t i = 0; i < 10; i++)
-	//{
-	//	//make few enemies then boss
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0, 800), nc::RandomRange(0,300)}, nc::RandomRange(0, nc::TwoPi), 2 }, engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("evenBetterEnemy.txt"), 300));
-	//}
+	for (size_t i = 0; i < 10; i++)
+	{
+		//make few enemies then boss
+		//scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0,800), nc::RandomRange(0, 300)}, nc::RandomRange(0, nc::TwoPi), 0.025f }, enemyTexture, 300));
+	}
 }
 
 void Game::OnAddPoints(const nc::Event& event)
