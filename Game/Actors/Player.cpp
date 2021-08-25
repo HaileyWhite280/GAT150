@@ -29,10 +29,9 @@ void Player::Update(float dt)
 {
 	Actor::Update(dt);
 
-	//movement, kinda busted idk
 	float thrust = 0;
-	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held) transform.rotation -= -100 * dt;
-	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held) transform.rotation -= 100 * dt;
+	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held) transform.rotation -= -5 * dt;
+	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held) transform.rotation -= 5 * dt;
 	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Held) thrust = speed;
 	if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_LSHIFT) == nc::InputSystem::eKeyState::Held) thrust *= 2;
 
