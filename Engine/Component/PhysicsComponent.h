@@ -16,5 +16,6 @@ namespace nc
 		Vector2 velocity;
 		Vector2 force;
 		Vector2 acceleration;
+		float drag = 1;
 	};
 }

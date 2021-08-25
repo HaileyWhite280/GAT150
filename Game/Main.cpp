@@ -4,6 +4,7 @@
 //check out GameArt.org
 //TODO Do Game Port and JSON
 //data() json.h
+//scene.txt data.size is size of photo
 
 int main(int, char**)
 {

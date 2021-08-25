@@ -8,12 +8,40 @@
             "rotation": 45.0
          },
          "components":[
+         {
+            "type":"PlayerComponent",
+            "speed":30
+         }
             {
                 "type":"SpriteComponent",
                 "textureName": "sf2.png"
             },
             {
                 "type":"PhysicsComponent"
+                "data.isDynamic":true,
+                "data.density":1,
+                "data.lockAngle":true,
+                "data.size":[64, 96]
+            }
+         ]
+      },
+       {
+         "type":"Actor",
+         "tag":"Ground",
+         "transform":{
+            "position": [400.0, 550.0],
+            "rotation": 45.0
+         },
+         "components":[
+            {
+                "type":"SpriteComponent",
+                "textureName": "Ground.png"
+            },
+            {
+                "type":"PhysicsComponent"
+                "data.isDynamic":false,
+                "data.density":1,
+                "data.size":[800, 20]
             }
          ]
       }
