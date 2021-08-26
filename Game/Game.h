@@ -15,7 +15,8 @@ public:
 		PlayLevel2,
 		PlayLevelBoss,
 		Game,
-		GameOver
+		GameOver,
+		GameDone
 
 	};
 

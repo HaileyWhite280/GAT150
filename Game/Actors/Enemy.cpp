@@ -24,16 +24,18 @@ void Enemy::Update(float dt)
 		if (fireTimer <= 0)
 		{
 			fireTimer = fireRate;
-			std::vector<nc::Vector2> points = { {-5, -5}, {5, -5}, {0, 5}, {-5, -5} };
-			//std::shared_ptr<nc::Texture> texture = std::make_shared<nc::Texture>(points, nc::Color{ 17, 16, 25 });
+			std::shared_ptr<nc::Texture> projectileTexture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particle01.png", scene->engine->Get<nc::Renderer>());
 
 			nc::Transform t = transform;
 			t.scale = 0.5;
-			//scene->AddActor(std::make_unique<Projectiles>(t, texture, 600.0f));
 
-			scene->engine->Get<nc::AudioSystem>()->PlayAudio("EnemyShoot");
-
+			std::unique_ptr<Projectiles> projectile = std::make_unique<Projectiles>(t, projectileTexture, 200);
+			projectile->tag = "Enemy";
+			scene->AddActor(std::move(projectile));
 		}
+
+		scene->engine->Get<nc::AudioSystem>()->AddAudio("EnemyShoot", "Audio/EnemyShoot.wav");
+		scene->engine->Get<nc::AudioSystem>()->PlayAudio("EnemyShoot");
 	}
 
 	transform.position += nc::Vector2::Rotate(nc::Vector2::right, transform.rotation) * speed * dt;
@@ -46,7 +48,12 @@ void Enemy::OnCollision(Actor* actor)
 	if (dynamic_cast<Projectiles*>(actor) && actor->tag == "Player")
 	{
 		destroy = true;
-		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 3, 1, texture, 50);
+
+		std::shared_ptr<nc::Texture> explosionTexture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particle02.png", scene->engine->Get<nc::Renderer>());
+		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 3, 1, explosionTexture, 3);
+
+
+		scene->engine->Get<nc::AudioSystem>()->AddAudio("explosion", "Audio/explosion.wav");
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 
 		nc::Event event;

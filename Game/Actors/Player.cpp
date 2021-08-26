@@ -23,6 +23,9 @@ void Player::Initialize()
 	locator = std::make_unique<Actor>();
 	locator->transform.localPosition = nc::Vector2{ 0 , -5 };
 	AddChild(std::move(locator));
+
+	scene->engine->Get<nc::AudioSystem>()->AddAudio("PlayerShoot", "Audio/PlayerShoot.wav");
+	scene->engine->Get<nc::AudioSystem>()->AddAudio("explosion", "Audio/explosion.wav");
 }
 
 void Player::Update(float dt)
@@ -39,51 +42,42 @@ void Player::Update(float dt)
 	nc::Vector2 acceleration = nc::Vector2::Rotate(nc::Vector2::up, transform.rotation) * thrust;
 	velocity += acceleration * dt;
 
-	//pulls to center (doesnt work)
-	//nc::Vector2 gravity = (nc::Vector2{ 400, 300 } - transform.position).Normalized() * 200;
-	//nc::Vector2 gravity = nc::Vector2::down * 200;
-	//acceleration += gravity;
-
 	velocity *= 0.99f;
 
 	transform.position += velocity * dt;
 	transform.position.x = nc::Wrap(transform.position.x, 0.0f, 800.0f);
 	transform.position.y = nc::Wrap(transform.position.y, 0.0f, 600.0f);
 
-	//fireTimer -= dt;
-	//immunityTime -= dt;
-	//if (fireTimer <= 0 && scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Held)
-	//{
-	//	fireTimer = fireRate;
+	fireTimer -= dt;
+	immunityTime -= dt;
+	if (fireTimer <= 0 && scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Held)
+	{
+		fireTimer = fireRate;
+		std::shared_ptr<nc::Texture> projectileTexture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particle01.png", scene->engine->Get<nc::Renderer>());
 
-	//	{
-	//	std::shared_ptr<nc::Texture> texture = std::make_shared<nc::Texture>();
+		{
+			nc::Transform t = transform;
+			t.scale = 0.5f;
+			t.position = transform.position + 50;
 
-	//	nc::Transform t = children[1]->transform;
-	//	t.scale = 0.5;
+			std::unique_ptr<Projectiles> projectile = std::make_unique<Projectiles>(t, projectileTexture, 200);
+			projectile->tag = "Player";
+			scene->AddActor(std::move(projectile));
+		}
 
-	//	std::unique_ptr<Projectiles> projectile = std::make_unique<Projectiles>(t, texture, 200); // engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("projectile.txt")
-	//	projectile->tag = "Player";
-	//	scene->AddActor(std::move(projectile));
-	//	}
+		//double bullets
+		{
+			nc::Transform t = transform;
+			t.scale = 0.5f;
 
-	//	double bullets;
-	//	{
-	//		std::shared_ptr<nc::Texture> texture = std::make_shared<nc::Texture>();
+			std::unique_ptr<Projectiles> projectile = std::make_unique<Projectiles>(t, projectileTexture, 200);
+			projectile->tag = "Player";
+			scene->AddActor(std::move(projectile));
+		}
 
-	//		nc::Transform t = children[2]->transform;
-	//		t.scale = 0.5;
+		scene->engine->Get<nc::AudioSystem>()->PlayAudio("PlayerShoot");
 
-	//		std::unique_ptr<Projectiles> projectile = std::make_unique<Projectiles>(t, texture, 100); // engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("projectile.txt")
-	//		projectile->tag = "Player";
-	//		scene->AddActor(std::move(projectile));
-	//	}
-
-	//	scene->engine->Get<nc::AudioSystem>()->PlayAudio("PlayerShoot");
-
-	//}
-
-	//std::vector<nc::Color> colors = { nc::Color::white, nc::Color::red, nc::Color::purple };
+	}
 
 	//scene->engine->Get<nc::ParticleSystem>()->Create(children[1]->transform.position, 3, 2, colors , 50, children[1]->transform.rotation, nc::DegToRad(30));
 }
@@ -92,8 +86,11 @@ void Player::OnCollision(Actor* actor)
 {
 	if (dynamic_cast<Enemy*>(actor) && immunityTime <= 0)
 	{
-		destroy = true;
-		//scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 3, 1, nc::Color::purple, 50);
+		//destroy = true;
+
+		std::shared_ptr<nc::Texture> explosionTexture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Textures/particle02.png", scene->engine->Get<nc::Renderer>());
+		scene->engine->Get<nc::ParticleSystem>()->Create(transform.position, 3, 2, explosionTexture, 3);
+
 		scene->engine->Get<nc::AudioSystem>()->PlayAudio("explosion");
 
 		nc::Event event;
