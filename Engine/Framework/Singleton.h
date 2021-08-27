@@ -16,8 +16,6 @@ namespace nc
 			return instance;
 		}
 
-		//void print() { std::cout << "heyo\n"; }
-
 	protected:
 		Singleton() {}
 	};

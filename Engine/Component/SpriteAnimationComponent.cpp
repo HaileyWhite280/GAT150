@@ -31,4 +31,20 @@ namespace nc
 	{
 		renderer->Draw(texture, rect, owner->transform);
 	}
+
+	bool SpriteAnimationComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+
+	bool SpriteAnimationComponent::Read(const rapidjson::Value& value)
+	{
+		std::string textureName;
+
+		JSON_READ(value, textureName);
+
+		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+
+		return true;
+	}
 }

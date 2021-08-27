@@ -70,39 +70,39 @@ namespace nc
 		actors.clear();
 	}
 
-	//Actor* Scene::FindActor(const std::string name)
-	//{
-	//	for (auto& actor : actors)
-	//	{
-	//		if (actor->name == name) actor.get();
-	//	}
-	//	return nullptr;
-	//}
+	Actor* Scene::FindActor(const std::string name)
+	{
+		for (auto& actor : actors)
+		{
+			if (actor->name == name) actor.get();
+		}
+		return nullptr;
+	}
 
-	//bool Scene::Write(const rapidjson::Value& value) const
-	//{
-	//	return false;
-	//}
+	bool Scene::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
 
-	//bool Scene::Read(const rapidjson::Value& value)
-	//{
-	//	if (value.HasMember("actors") && value["actors"].IsArray())
-	//	{
-	//		for (auto& actorValue : value["actors"].GetArray())
-	//		{
-	//			std::string type;
-	//			JSON_READ(actorValue, type);
+	bool Scene::Read(const rapidjson::Value& value)
+	{
+		if (value.HasMember("actors") && value["actors"].IsArray())
+		{
+			for (auto& actorValue : value["actors"].GetArray())
+			{
+				std::string type;
+				JSON_READ(actorValue, type);
 
-	//			auto actor = ObjectFactory::Instance().Create<Actor>(type);
-	//			if (actor)
-	//			{
-	//				actor->scene = this;
-	//				actor->Read(actorValue);
-	//				AddActor(std::move(actor));
-	//			}
-	//		}
-	//	}
+				auto actor = ObjectFactory::Instance().Create<Actor>(type);
+				if (actor)
+				{
+					actor->scene = this;
+					actor->Read(actorValue);
+					AddActor(std::move(actor));
+				}
+			}
+		}
 
-	//	return true;
-	//}
+		return true;
+	}
 }

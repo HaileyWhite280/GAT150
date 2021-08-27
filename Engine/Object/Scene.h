@@ -11,7 +11,7 @@ namespace nc
 	class Engine;
 	class Renderer;
 
-	class Scene : public Object //, public ISerializable
+	class Scene : public Object, public Serializable
 	{
 	public:
 		void Update(float dt);
@@ -21,10 +21,10 @@ namespace nc
 		void RemoveActor(Actor* actor);
 		void RemoveAllActors();
 
-		//Actor* FindActor(const std::string name);
+		Actor* FindActor(const std::string name);
 
-		//virtual bool Write(const rapidjson::Value& value) const override;
-		//virtual bool Read(const rapidjson::Value& value) override;
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		template<typename T>
 		T* GetActor();

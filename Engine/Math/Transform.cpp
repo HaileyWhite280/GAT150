@@ -34,16 +34,16 @@ namespace nc
 		scale = matrix.GetScale();
 	}
 
-	//bool Transform::Write(const rapidjson::Value& value) const
-	//{
-	//	return false;
-	//}
+	bool Transform::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
 
-	//bool Transform::Read(const rapidjson::Value& value)
-	//{
-	//	//JSON_READ(value, position);
-	//	JSON_READ(value, rotation);
+	bool Transform::Read(const rapidjson::Value& value)
+	{
+		JSON_READ(value, position);
+		JSON_READ(value, rotation);
 
-	//	return true;
-	//}
+		return true;
+	}
 }

@@ -3,7 +3,7 @@
 
 namespace nc
 {
-	class SpriteAnimationComponent : public SpriteComponent
+	class SpriteAnimationComponent : public SpriteComponent, public Serializable
 	{
 	public:
 		virtual void Update() override;
@@ -23,12 +23,9 @@ namespace nc
 		float frameTime = 0;
 
 		SDL_Rect rect;
-	};
 
-	//Read: SpriteComponent::Read(value);
-	// 	   JSON_READ fps, numframes, startframe, endframe
-	// 
-	// 	   if(startFrame = 0 && endFrame == 0) endFrame = numFramesX * numFramesY;
-	// 	   frame = startFrame;
-	//return true;
+		// Inherited via Serializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
+	};
 }

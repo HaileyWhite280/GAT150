@@ -44,37 +44,37 @@ namespace nc
 		components.push_back(std::move(component));
 	}
 
-	//bool Actor::Write(const rapidjson::Value& value) const
-	//{
-	//	return false;
-	//}
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
 
-	//bool Actor::Read(const rapidjson::Value& value)
-	//{
-	//	JSON_READ(value, tag);
-	//	JSON_READ(value, name);
-	//	if (value.HasMember("transform"))
-	//	{
-	//		transform.Read(value["transform"]);
-	//	}
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		JSON_READ(value, tag);
+		JSON_READ(value, name);
+		if (value.HasMember("transform"))
+		{
+			transform.Read(value["transform"]);
+		}
 
-	//	if (value.HasMember("components") && value["components"].IsArray())
-	//	{
-	//		for (auto& componentValue : value["components"].GetArray())
-	//		{
-	//			std::string type;
-	//			JSON_READ(componentValue, type);
+		if (value.HasMember("components") && value["components"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				JSON_READ(componentValue, type);
 
-	//			auto component = ObjectFactory::Instance().Create<Component>(type);
-	//			if (component)
-	//			{
-	//				component->owner = this;
-	//				component->Read(componentValue);
-	//				AddComponent(std::move(component));
-	//			}
-	//		}
-	//	}
+				auto component = ObjectFactory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->owner = this;
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+			}
+		}
 
-	//	return true;
-	//}
+		return true;
+	}
 }

@@ -12,6 +12,14 @@ namespace nc
 		acceleration = Vector2::zero;
 	}
 
-	//on Read:
-	//JSON_READ(value, drag);
+	bool PhysicsComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+
+	bool PhysicsComponent::Read(const rapidjson::Value& value)
+	{
+		JSON_READ(value, drag);
+		return false;
+	}
 }

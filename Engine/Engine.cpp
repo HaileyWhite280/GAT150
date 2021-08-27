@@ -14,13 +14,15 @@ namespace nc
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 
-//		REGISTER_CLASS(SpriteComponent);
-//		REGISTER_CLASS(Actor);
-//		REGISTER_CLASS(SpriteAnimationComponent);
-//		REGISTER_CLASS(PhysicsComponent);
-////		REGISTER_CLASS(RBPhysicsComponent);
-		//ObjectFactory::Instance().Register<nc::SpriteComponent>("SpriteComponent");
-		//TODO add actor, SpriteComponent, SpriteAnimationComponent, and PhysicsComponent
+		REGISTER_CLASS(SpriteComponent);
+		REGISTER_CLASS(Actor);
+		REGISTER_CLASS(SpriteAnimationComponent);
+		REGISTER_CLASS(PhysicsComponent);
+		REGISTER_CLASS(RBPhysicsComponent);
+		ObjectFactory::Instance().Register<nc::SpriteComponent>("SpriteComponent");
+		ObjectFactory::Instance().Register<nc::Actor>("Actor");
+		ObjectFactory::Instance().Register<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
+		ObjectFactory::Instance().Register<nc::PhysicsComponent>("PhysicsComponent");
 	}
 
 	void Engine::Shutdown()

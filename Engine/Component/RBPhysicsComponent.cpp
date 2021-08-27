@@ -3,22 +3,26 @@
 
 namespace nc
 {
-	//ApplyForce
-	//if(body)
-	//{
-	//body->ApplyForceToCenter(force, true);
-	// 	   body->SetGravityScale(data.gravityScale);
-	// 	   body->SetLinearDamping(1); //Might be changed to Drag
-	//}
+	void RBPhysicsComponent::Update()
+	{
+		if (!body)
+		{
+			body = owner->scene->engine->Get<PhysicsSystem>()->CreateBody(owner->transform.position, owner->transform.rotation, data, owner);
+		}
+		owner->transform.position = PhysicsSystem::WorldToScreen(body->GetPosition());
+		owner->transform.rotation = body->GetAngle();
+		velocity = body->GetLinearVelocity();
+	}
 
-	//Update
-	//if(!body)
-	//{
-	//body = owner->scene->engine->Get<PhysicsSystem>()->CreateBody(owner->transform.position, owner->transform.rotation, data, owner);
-	//}
-	//owner->transform.position = PhysicsSystem::WorldToScreen(body->GetPosition());
-	//owner->transform.rotation = body->GetAngle();
-	//velocity = body->GetLinearVelocity();
+	void RBPhysicsComponent::ApplyForce(const Vector2& force)
+	{
+		if(body)
+		{
+			body->ApplyForceToCenter(force, true);
+ 			body->SetGravityScale(data.gravityScale);
+ 			body->SetLinearDamping(1);
+		}
+	}
 
 	//Read
 	//JSON_READ(value, data.isDynamic);
