@@ -11,7 +11,7 @@ namespace nc
 	class Scene;
 	class Renderer;
 
-	class Actor : public Object, public ISerializable
+	class Actor : public Object //, public ISerializable
 	{
 	public:
 		Actor() {}
@@ -36,11 +36,12 @@ namespace nc
 		template<class T>
 		T* GetComponent();
 
-		virtual bool Write(const rapidjson::Value& value) const override;
-		virtual bool Read(const rapidjson::Value& value) override;
+		//virtual bool Write(const rapidjson::Value& value) const override;
+		//virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
 		bool destroy = false;
+		std::string name;
 		std::string tag;
 
 		Transform transform;

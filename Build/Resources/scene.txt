@@ -2,9 +2,11 @@
    "actors":[
       {
          "type":"Actor",
+         "name":"Player",
          "tag":"Player",
          "transform":{
             "position": [400.0, 300.0],
+            "scale":[2, 2],
             "rotation": 45.0
          },
          "components":[
@@ -13,15 +15,51 @@
             "speed":30
          }
             {
-                "type":"SpriteComponent",
-                "textureName": "sf2.png"
+                "type":"SpriteAnimationComponent",
+                "textureName": "character.png",
+                "fps": 10,
+                "numFramesX":18,
+                "numFramesY":11,
+                "startFrame": 90,
+                "endFrame":95
             },
             {
                 "type":"PhysicsComponent"
                 "data.isDynamic":true,
                 "data.density":1,
                 "data.lockAngle":true,
-                "data.size":[64, 96]
+                "data.size":[32, 32]
+            }
+         ]
+      },
+       {
+         "type":"Actor",
+         "tag":"Enemy",
+         "transform":{
+            "position": [500.0, 200.0],
+            "rotation": 45.0
+         },
+         "components":[
+                  {
+            "type":"EnemyComponent",
+            "speed":30
+         }
+            {
+                "type":"SpriteAnimationComponent",
+                "textureName": "bat.png",
+                "fps": 10,
+                "numFramesX":4,
+                "numFramesY":1
+            },
+            {
+                "type":"RBPhysicsComponent"
+                "data.isDynamic":true,
+                "data.isSensor":true,
+                "data.density":1,
+                "data.lockAngle":true,
+                "data.restitution":0.1,
+                "data.gravityScale":2,
+                "data.size":[32, 32]
             }
          ]
       },
@@ -35,12 +73,15 @@
          "components":[
             {
                 "type":"SpriteComponent",
-                "textureName": "Ground.png"
+                "textureName": "Textures/Ground.png"
             },
             {
                 "type":"PhysicsComponent"
                 "data.isDynamic":false,
                 "data.density":1,
+                "data.lockAngle":true,
+                "data.restitution":0.1,
+                "data.gravityScale":2,
                 "data.size":[800, 20]
             }
          ]

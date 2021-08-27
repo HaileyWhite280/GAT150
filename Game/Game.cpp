@@ -9,7 +9,8 @@ void Game::Initialize()
 	engine->Get<nc::Renderer>()->Create("GAT150", 800, 600);
 
 	//register classes
-	REGISTER_CLASS(PlayerComponent);
+	//REGISTER_CLASS(PlayerComponent);
+	//REGISTER_CLASS(EnemyComponent);
 
 	//scene create
 	scene = std::make_unique<nc::Scene>();
@@ -18,10 +19,10 @@ void Game::Initialize()
 	nc::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	nc::SetFilePath("../Resources");
 
-	rapidjson::Document document;
-	bool success = nc::json::Load("scene.txt", document);
-	assert(success);
-	scene->Read(document);
+	//rapidjson::Document document;
+	//bool success = nc::json::Load("scene.txt", document);
+	//assert(success);
+	//scene->Read(document);
 
 	////actors
 	//std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ {400, 300}, 0, 1 });

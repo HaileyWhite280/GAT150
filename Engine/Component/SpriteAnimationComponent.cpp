@@ -13,7 +13,7 @@ namespace nc
 			frameTimer = 0;
 			frame++;
 
-			if (frame >= numFramesX * numFramesY) frame = 0;
+			if (frame >= endFrame) frame = startFrame;
 		}
 
 		Vector2 size = texture.get()->GetSize();

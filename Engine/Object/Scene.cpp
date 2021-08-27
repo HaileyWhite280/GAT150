@@ -70,30 +70,39 @@ namespace nc
 		actors.clear();
 	}
 
-	bool Scene::Write(const rapidjson::Value& value) const
-	{
-		return false;
-	}
+	//Actor* Scene::FindActor(const std::string name)
+	//{
+	//	for (auto& actor : actors)
+	//	{
+	//		if (actor->name == name) actor.get();
+	//	}
+	//	return nullptr;
+	//}
 
-	bool Scene::Read(const rapidjson::Value& value)
-	{
-		if (value.HasMember("actors") && value["actors"].IsArray())
-		{
-			for (auto& actorValue : value["actors"].GetArray())
-			{
-				std::string type;
-				JSON_READ(actorValue, type);
+	//bool Scene::Write(const rapidjson::Value& value) const
+	//{
+	//	return false;
+	//}
 
-				auto actor = ObjectFactory::Instance().Create<Actor>(type);
-				if (actor)
-				{
-					actor->scene = this;
-					actor->Read(actorValue);
-					AddActor(std::move(actor));
-				}
-			}
-		}
+	//bool Scene::Read(const rapidjson::Value& value)
+	//{
+	//	if (value.HasMember("actors") && value["actors"].IsArray())
+	//	{
+	//		for (auto& actorValue : value["actors"].GetArray())
+	//		{
+	//			std::string type;
+	//			JSON_READ(actorValue, type);
 
-		return true;
-	}
+	//			auto actor = ObjectFactory::Instance().Create<Actor>(type);
+	//			if (actor)
+	//			{
+	//				actor->scene = this;
+	//				actor->Read(actorValue);
+	//				AddActor(std::move(actor));
+	//			}
+	//		}
+	//	}
+
+	//	return true;
+	//}
 }

@@ -1,9 +1,8 @@
 #pragma once
 #include "document.h"
-#include "Engine.h"
+#include "Math/Vector2.h"
+#include "Math/Color.h"
 #include <string>
-
-#define JSON_READ(value, data) nc::json::Get(value, #data, data);
 
 namespace nc
 {
@@ -11,7 +10,7 @@ namespace nc
 	{
 		bool Load(const std::string& filename, rapidjson::Document& document);
 
-		bool Get(const rapidjson::Value& value, const std::string& name, int& data);
+		bool Get(const rapidjson::Value& value, const std::string& name, int& key);
 		bool Get(const rapidjson::Value& value, const std::string& name, float& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, bool& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data);

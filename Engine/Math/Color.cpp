@@ -35,6 +35,13 @@ namespace nc
 
 		return stream;
 	}
+
+	std::ostream& operator << (std::ostream& stream, Color& c)
+	{
+		stream << c.r << ", " << c.b << ", " << c.g;
+		return stream;
+	}
+
 	Color Color::HSVtoRGB(float h, float s, float v)
 	{
 		return Color();

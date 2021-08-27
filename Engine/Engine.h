@@ -58,7 +58,7 @@
 
 namespace nc
 {
-	using ObjectFactory = Singleton<Factory<std::string, Object>>;
+	//using ObjectFactory = Singleton<Factory<std::string, Object>>;
 
 	class Engine
 	{

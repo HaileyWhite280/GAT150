@@ -6,7 +6,7 @@ namespace nc
 {
 	class Actor;
 
-	class Component : public Object, public ISerializable
+	class Component : public Object //, public ISerializable
 	{
 	public:
 		virtual void Update() = 0;

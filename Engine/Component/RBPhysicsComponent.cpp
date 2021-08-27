@@ -7,6 +7,8 @@ namespace nc
 	//if(body)
 	//{
 	//body->ApplyForceToCenter(force, true);
+	// 	   body->SetGravityScale(data.gravityScale);
+	// 	   body->SetLinearDamping(1); //Might be changed to Drag
 	//}
 
 	//Update
