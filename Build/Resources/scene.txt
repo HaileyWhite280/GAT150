@@ -22,6 +22,28 @@
                 "numFramesY":11,
                 "startFrame": 90,
                 "endFrame":95
+                "sequences":[
+                    {
+                        "name":"idle",
+                        "sequence.fps":5,
+                        "startFrame":0,
+                        "endFrame":1
+                    },
+                     {
+                        "name":"walk_right",
+                        "fps":10,
+                        "startFrame": 90,
+                        "endFrame":95
+                     },
+                      {
+                        "name":"walk_left",
+                        "fps":10,
+                        "startFrame":162,
+                        "endFrame":167
+                     }
+                    
+                ],
+                "defaultSequence":"idle"
             },
             {
                 "type":"PhysicsComponent"

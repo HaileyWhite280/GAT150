@@ -13,7 +13,7 @@ namespace nc
 			frameTimer = 0;
 			frame++;
 
-			if (frame >= endFrame) frame = startFrame;
+			if (frame > endFrame) frame = startFrame;
 		}
 
 		Vector2 size = texture.get()->GetSize();
@@ -32,6 +32,23 @@ namespace nc
 		renderer->Draw(texture, rect, owner->transform);
 	}
 
+	void SpriteAnimationComponent::SetSequence(const std::string& name)
+	{
+		if (sequenceName == name) return;
+
+		sequenceName = name;
+		if (sequences.find(name) != sequences.end())
+		{
+			Sequence sequence = sequences[name];
+
+			startFrame = sequence.startFrame;
+			endFrame = sequence.endFrame;
+			fps = sequence.fps;
+
+			frame = startFrame;
+		}
+	}
+
 	bool SpriteAnimationComponent::Write(const rapidjson::Value& value) const
 	{
 		return false;
@@ -39,11 +56,34 @@ namespace nc
 
 	bool SpriteAnimationComponent::Read(const rapidjson::Value& value)
 	{
-		std::string textureName;
+		//std::string textureName;
 
-		JSON_READ(value, textureName);
+		//JSON_READ(value, textureName);
 
-		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+		//texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+
+		//PUT JSON_READS
+
+				//if(startFrame == 0 && endFrame == 0) endFram = (numFramesX) * numFramesY);
+
+		if(value.HasMember("sequences") && value["sequences"].IsArray())
+			{
+			for (auto& sequenceValue : value["sequences"].GetArray())
+				{
+					std::string name;
+						JSON_READ(sequenceValue, name);
+
+						Sequence sequence;
+						JSON_READ(sequenceValue, sequence.fps);
+						JSON_READ(sequenceValue, sequence.startFrame);
+						JSON_READ(sequenceValue, sequence.endFrame);
+
+						sequences[name] = sequence;
+			}
+				std::string defaultSequence;
+				JSON_READ(value, defaultSequence);
+
+				SetSequence(defaultSequence);
 
 		return true;
 	}

@@ -4,7 +4,7 @@
 
 namespace nc
 {
-	class PhysicsComponent : public Component, public Serializable
+	class PhysicsComponent : public Component
 	{
 	public:
 		void Update() override;

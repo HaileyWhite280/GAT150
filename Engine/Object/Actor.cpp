@@ -27,9 +27,30 @@ namespace nc
 		std::for_each(children.begin(), children.end(), [renderer](auto& child) {child->Draw(renderer); });
 	}
 
-	float Actor::GetRadius()
+	void Actor::BeginContact(Actor* other)
 	{
-		return 0;
+		Event event;
+
+		event.name = "collisionEnter";
+		event.data = other;
+		event.reciever = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+
+		std::cout << "being: " << other->tag << std::endl;
+	}
+
+	void Actor::EndContact(Actor* other)
+	{
+		Event event;
+
+		event.name = "collisionExit";
+		event.data = other;
+		event.reciever = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+
+		std::cout << "end: " << other->tag << std::endl;
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor)
@@ -53,6 +74,7 @@ namespace nc
 	{
 		JSON_READ(value, tag);
 		JSON_READ(value, name);
+
 		if (value.HasMember("transform"))
 		{
 			transform.Read(value["transform"]);
@@ -70,6 +92,7 @@ namespace nc
 				{
 					component->owner = this;
 					component->Read(componentValue);
+					component->Create();
 					AddComponent(std::move(component));
 				}
 			}

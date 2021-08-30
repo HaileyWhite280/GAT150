@@ -19,10 +19,15 @@ namespace nc
 		REGISTER_CLASS(SpriteAnimationComponent);
 		REGISTER_CLASS(PhysicsComponent);
 		REGISTER_CLASS(RBPhysicsComponent);
+		REGISTER_CLASS(AudioComponent);
+		REGISTER_CLASS(TextComponent);
 		ObjectFactory::Instance().Register<nc::SpriteComponent>("SpriteComponent");
 		ObjectFactory::Instance().Register<nc::Actor>("Actor");
 		ObjectFactory::Instance().Register<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
 		ObjectFactory::Instance().Register<nc::PhysicsComponent>("PhysicsComponent");
+		//ObjectFactory::Instance().Register<nc::RBPhysicsComponent>("RBPhysicsComponent");
+		//ObjectFactory::Instance().Register<nc::AudioComponent>("AudioComponent");
+		//ObjectFactory::Instance().Register<nc::TextComponent>("TextComponent");
 	}
 
 	void Engine::Shutdown()

@@ -3,6 +3,7 @@
 #include "Math/Transform.h"
 #include "Component/Component.h"
 #include "Core/Serializable.h"
+#include "Framework/EventSystem.h"
 #include <memory>
 #include <vector>
 
@@ -21,10 +22,9 @@ namespace nc
 
 		virtual void Update(float dt);
 		virtual void Draw(Renderer* renderer);
-		
-		virtual void OnCollision(Actor* actor) {}
 
-		float GetRadius();
+		void BeginContact(Actor* other);
+		void EndContact(Actor* other);
 
 		void AddChild(std::unique_ptr<Actor> actor);
 

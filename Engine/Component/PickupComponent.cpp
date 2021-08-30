@@ -1,0 +1,6 @@
+#include "PickupComponent.h"
+
+namespace
+{
+
+}

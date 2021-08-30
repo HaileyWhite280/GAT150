@@ -2,11 +2,10 @@
 #include "Core/Json.h"
 
 //check out GameArt.org
-//TODO JSON
-//data() json.h
+//TODO Fix Everything
 //scene.txt data.size is size of photo
-//download some textures
-//scene.txt is a bit messed up
+//download some things
+//scene.txt is a bit messed up... along with everything else
 
 int main(int, char**)
 {
