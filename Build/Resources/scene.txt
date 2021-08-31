@@ -15,7 +15,7 @@
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":150
+               "speed":15
             },
             {
                "type":"SpriteAnimationComponent",
