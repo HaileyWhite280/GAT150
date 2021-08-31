@@ -5,15 +5,15 @@ using namespace nc;
 
 PickupComponent::~PickupComponent()
 {
-	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
-	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collisionEnter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collisionExit", owner);
 }
 
 void PickupComponent::Create()
 {
-	std::cout << "Create Coin Called" << std::endl;
-	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&PickupComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
-	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&PickupComponent::OnCollisionExit, this, std::placeholders::_1), owner);
+	std::cout << "CreateCoin Called" << std::endl;
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collisionEnter", std::bind(&PickupComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collisionExit", std::bind(&PickupComponent::OnCollisionExit, this, std::placeholders::_1), owner);
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("coin", "audio/coin.wav");
 }
 
@@ -27,7 +27,7 @@ void PickupComponent::OnCollisionEnter(const nc::Event& event)
 	void* p = std::get<void*>(event.data);
 	Actor* actor = reinterpret_cast<Actor*>(p);
 
-	std::cout << "Pickup On Colision Called" << std::endl;
+	std::cout << "Pickup OnColision Called" << std::endl;
 
 	if (istring_compare(actor->tag, "Player")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");

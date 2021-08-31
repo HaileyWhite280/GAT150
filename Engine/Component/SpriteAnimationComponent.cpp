@@ -56,15 +56,22 @@ namespace nc
 
 	bool SpriteAnimationComponent::Read(const rapidjson::Value& value)
 	{
-		//std::string textureName;
+		std::string textureName;
 
-		//JSON_READ(value, textureName);
+		JSON_READ(value, textureName);
+		JSON_READ(value, frame);
+		JSON_READ(value, fps);
+		JSON_READ(value, numFramesX);
+		JSON_READ(value, numFramesY);
+		JSON_READ(value, startFrame);
+		JSON_READ(value, endFrame);
+		JSON_READ(value, frameTimer);
+		JSON_READ(value, frameTime);
 
-		//texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
 
-		//PUT JSON_READS
-
-				//if(startFrame == 0 && endFrame == 0) endFram = (numFramesX) * numFramesY);
+		//missing ;?
+		//if(startFrame == 0 && endFrame == 0) endFrame = (numFramesX) * numFramesY);
 
 		if(value.HasMember("sequences") && value["sequences"].IsArray())
 			{

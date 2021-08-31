@@ -5,17 +5,17 @@ using namespace nc;
 
 PlayerComponent::~PlayerComponent()
 {
-	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
-	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collisionEnter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collisionExit", owner);
 }
 
 void PlayerComponent::Create()
 {
-	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
-	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1), owner);
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collisionEnter", std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collisionExit", std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1), owner);
 
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("hurt", "audio/hurt.wav");
-	owner->scene->engine->Get<AudioSystem>()->AddAudio("jump", "audio/jump.mp3");
+	//owner->scene->engine->Get<AudioSystem>()->AddAudio("jump", "audio/jump.mp3");
 }
 
 void PlayerComponent::Update()
@@ -29,15 +29,16 @@ void PlayerComponent::Update()
 	{
 		force.x += speed;
 	}
-	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Pressed)
-	{
-		owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
-		force.y -= 400;
-	}
 	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_S) == InputSystem::eKeyState::Held)
 	{
 		force.y += speed;
 	}
+	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_W) == InputSystem::eKeyState::Pressed)
+	{
+		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
+		force.y -= 400;
+	}
+
 
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
 	assert(physicsComponent);
@@ -88,6 +89,7 @@ bool PlayerComponent::Write(const rapidjson::Value& value) const
 bool PlayerComponent::Read(const rapidjson::Value& value)
 {
 	JSON_READ(value, speed);
+
 	return true;
 }
 

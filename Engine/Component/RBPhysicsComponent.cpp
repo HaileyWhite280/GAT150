@@ -32,13 +32,22 @@ namespace nc
 		}
 	}
 
-	//Read
-	//JSON_READ(value, data.isDynamic);
-	//JSON_READ(value, data.isSensor);
-	//JSON_READ(value, data.lockAngle);
-	//JSON_READ(value, data.size);
-	//JSON_READ(value, data.density);
-	//JSON_READ(value, data.friction);
-	//JSON_READ(value, data.restitution);
-	//JSON_READ(value, data.gravityScale);
+	bool RBPhysicsComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+
+	bool RBPhysicsComponent::Read(const rapidjson::Value& value)
+	{
+		JSON_READ(value, data.isDynamic);
+		JSON_READ(value, data.isSensor);
+		JSON_READ(value, data.lockAngle);
+		JSON_READ(value, data.size);
+		JSON_READ(value, data.density);
+		JSON_READ(value, data.friction);
+		JSON_READ(value, data.restitution);
+		JSON_READ(value, data.gravityScale);
+
+		return false;
+	}
 }

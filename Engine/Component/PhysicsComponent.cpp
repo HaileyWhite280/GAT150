@@ -20,6 +20,10 @@ namespace nc
 	bool PhysicsComponent::Read(const rapidjson::Value& value)
 	{
 		JSON_READ(value, drag);
-		return false;
+		JSON_READ(value, force);
+		JSON_READ(value, velocity);
+		JSON_READ(value, acceleration);
+
+		return true;
 	}
 }

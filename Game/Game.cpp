@@ -8,18 +8,17 @@
 void Game::Initialize()
 {
     //create engine
-    engine = std::make_unique<nc::Engine>(); //new Engine()
+    engine = std::make_unique<nc::Engine>();
     engine->Startup();
-    engine->Get<nc::Renderer>()->Create("Gat150", 800, 600);
+    engine->Get<nc::Renderer>()->Create("GAT150", 800, 600);
 
     //register classes
     REGISTER_CLASS(PlayerComponent);
     REGISTER_CLASS(EnemyComponent);
     REGISTER_CLASS(PickupComponent);
 
-
     //create scene
-    scene = std::make_unique<nc::Scene>(); //new Scene()
+    scene = std::make_unique<nc::Scene>();
     scene->engine = engine.get();
 
     nc::SetFilePath("../Resources");
@@ -38,13 +37,14 @@ void Game::Initialize()
 
 void Game::Shutdown()
 {
-    scene->RemoveAllActor();
+    scene->RemoveAllActors();
     engine->Shutdown();
 }
 
 void Game::Update()
 {
     engine->Update();
+
     //update
     if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed)
     {

@@ -7,7 +7,7 @@ namespace nc
 {
 	void nc::SpriteComponent::Update()
 	{
-		//
+		
 	}
 
 	void nc::SpriteComponent::Draw(Renderer* renderer)
@@ -30,9 +30,4 @@ namespace nc
 
 		return true;
 	}
-
-	//Read: std::string textureName;
-	//JSON_READ(value, textureName);
-	//texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
-	//return true
 }

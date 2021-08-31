@@ -6,11 +6,11 @@
 class PlayerComponent : public nc::Component
 {
 public:
-	void Create() override;
-	virtual void Update() override;
-
 	virtual ~PlayerComponent();
 	std::unique_ptr<Object> Clone() const { return std::make_unique<PlayerComponent>(*this); };
+
+	void Create() override;
+	virtual void Update() override;
 
 	virtual void OnCollisionEnter(const nc::Event& event);
 	virtual void OnCollisionExit(const nc::Event& event);
