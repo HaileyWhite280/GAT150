@@ -29,10 +29,6 @@ void PlayerComponent::Update()
 	{
 		force.x += speed;
 	}
-	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_S) == InputSystem::eKeyState::Held)
-	{
-		force.y += speed;
-	}
 	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_W) == InputSystem::eKeyState::Pressed)
 	{
 		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");

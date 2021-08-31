@@ -70,8 +70,7 @@ namespace nc
 
 		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
 
-		//missing ;?
-		//if(startFrame == 0 && endFrame == 0) endFrame = (numFramesX) * numFramesY);
+		if (startFrame == 0 && endFrame == 0) { endFrame = (numFramesX * numFramesY) -1; }
 
 		if(value.HasMember("sequences") && value["sequences"].IsArray())
 			{

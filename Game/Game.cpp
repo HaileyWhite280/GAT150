@@ -28,11 +28,11 @@ void Game::Initialize()
     nc::json::Load("scene.txt", document);
     scene->Read(document);
 
-    for (int i = 0; i < 10; i++) {
-        auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin");
-        actor->transform.position = nc::Vector2{ nc::RandomRange(0,800), nc::RandomRange(400,500) };
-        scene->AddActor(std::move(actor));
-    }
+    //for (int i = 0; i < 10; i++) {
+    //    auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("coin");
+    //    actor->transform.position = nc::Vector2{ nc::RandomRange(0,800), nc::RandomRange(400,500) };
+    //    scene->AddActor(std::move(actor));
+    //}
 }
 
 void Game::Shutdown()
