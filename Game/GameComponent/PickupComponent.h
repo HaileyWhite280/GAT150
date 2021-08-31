@@ -3,14 +3,14 @@
 #include "Framework/EventSystem.h"
 #include <list>
 
-class PlayerComponent : public nc::Component
+class PickupComponent : public nc::Component
 {
 public:
 	void Create() override;
 	virtual void Update() override;
 
-	virtual ~PlayerComponent();
-	std::unique_ptr<Object> Clone() const { return std::make_unique<PlayerComponent>(*this); };
+	virtual ~PickupComponent();
+	std::unique_ptr<Object> Clone() const { return std::make_unique<PickupComponent>(*this); };
 
 	virtual void OnCollisionEnter(const nc::Event& event);
 	virtual void OnCollisionExit(const nc::Event& event);
@@ -24,7 +24,3 @@ public:
 private:
 	std::list<nc::Actor*> contacts;
 };
-
-
-
-

@@ -126,9 +126,6 @@
     <ClCompile Include="Component\TextComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Component\PickupComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -246,9 +243,6 @@
       <Filter>Source Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="Component\TextComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\PickupComponent.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
   </ItemGroup>

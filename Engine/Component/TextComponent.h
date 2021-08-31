@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine.h"
-#include <string>
 
 namespace nc
 {
@@ -10,6 +9,8 @@ namespace nc
 	class TextComponent : public GraphicsComponent
 	{
 	public:
+		std::unique_ptr<Object> Clone() const { return std::make_unique<TextComponent>(*this); }
+
 		virtual void Update() override;
 		virtual void Draw(Renderer* renderer) override;
 
@@ -25,7 +26,7 @@ namespace nc
 		Color color;
 		std::string text;
 
-		shared_ptr<Font> font;
-		shared_ptr<Texture> texture;
+		std::shared_ptr<Font> font;
+		std::shared_ptr<Texture> texture;
 	};
 }

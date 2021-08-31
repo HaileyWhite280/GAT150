@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\GameComponent">
+      <UniqueIdentifier>{9d3ff3c8-4893-44e9-806f-0161c7c57a0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -22,21 +25,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameComponent\PlayerComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameComponent\EnemyComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponent\PickupComponent.cpp">
+      <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponent\PlayerComponent.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="GameComponent\PickupComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyComponent.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="GameComponent\PlayerComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent\EnemyComponent.h">
+      <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

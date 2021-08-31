@@ -68,17 +68,18 @@ namespace nc
 
 		if(value.HasMember("sequences") && value["sequences"].IsArray())
 			{
-			for (auto& sequenceValue : value["sequences"].GetArray())
+				for (auto& sequenceValue : value["sequences"].GetArray())
 				{
 					std::string name;
-						JSON_READ(sequenceValue, name);
+					JSON_READ(sequenceValue, name);
 
-						Sequence sequence;
-						JSON_READ(sequenceValue, sequence.fps);
-						JSON_READ(sequenceValue, sequence.startFrame);
-						JSON_READ(sequenceValue, sequence.endFrame);
+					Sequence sequence;
+					JSON_READ(sequenceValue, sequence.fps);
+					JSON_READ(sequenceValue, sequence.startFrame);
+					JSON_READ(sequenceValue, sequence.endFrame);
 
-						sequences[name] = sequence;
+					sequences[name] = sequence;
+				}
 			}
 				std::string defaultSequence;
 				JSON_READ(value, defaultSequence);

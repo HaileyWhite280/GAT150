@@ -42,6 +42,8 @@
 #include "Core/Json.h"
 
 //components
+#include "Component/Component.h"
+#include "Component/GraphicsComponent.h"
 #include "Component/SpriteComponent.h"
 #include "Component/PhysicsComponent.h"
 #include "Component/SpriteAnimationComponent.h"
@@ -51,6 +53,9 @@
 
 //Physics
 #include "Physics/PhysicsSystem.h"
+
+//InputSystem
+#include "Input/InputSystem.h"
 
 #include <vector>
 #include <memory>

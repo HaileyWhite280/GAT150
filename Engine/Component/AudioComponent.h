@@ -1,20 +1,22 @@
 #pragma once
-#include "Engine.h"
-#include <string>
+#include "Component.h"
+#include "Audio/AudioChannel.h"
 
 namespace nc
 {
 	class AudioComponent : public Component
 	{
 	public:
+		std::unique_ptr<Object> Clone() const { return std::make_unique<AudioComponent>(*this); }
+
 		virtual void Update() override;
 
 		void Play();
 		void Stop();
 
 		//write read
-		bool Write(const rapidjson::Value& value) const;
-		bool Read(const rapidjson::Value& value);
+		bool Write(const rapidjson::Value& value) const override;
+		bool Read(const rapidjson::Value& value) override;
 
 	public:
 		std::string soundName;

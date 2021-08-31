@@ -24,13 +24,13 @@ namespace nc
 
 	bool TextComponent::Read(const rapidjson::Value& value)
 	{
-		JSON_READ(fontName);
-		JSON_READ(fontSize);
-		JSON_READ(color);
-		JSON_READ(text);
+		JSON_READ(value, fontName);
+		JSON_READ(value, fontSize);
+		JSON_READ(value, color);
+		JSON_READ(value, text);
 
-		font = engine->Get<ResourceSystem>()->Get<Font>(fontName, &fontSize);
-		texture = engine->Get<ResourceSystem>()->Get<Texture>("texture", engine->Get<Renderer>());
+		font = owner->scene->engine->Get<ResourceSystem>()->Get<Font>(fontName, &fontSize);
+		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>("texture", owner->scene->engine->Get<Renderer>());
 
 		SetText(text);
 
