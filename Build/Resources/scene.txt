@@ -6,8 +6,8 @@
          "tag":"Player",
          "transform":{
             "position":[
-               400,
-               300
+               300,
+               250
             ],
             "scale":[2,2],
             "rotation":0
@@ -40,7 +40,7 @@
                "data.lockAngle":true,
                "data.restitution":0.1,
                "data.gravityScale":0.5,
-               "data.size":[64,64]
+               "data.size":[32,64]
             },
             {
 	            "type":"AudioComponent",
@@ -60,8 +60,8 @@
          "tag":"Enemy",
          "transform":{
             "position":[
-               500,
-               200
+               300,
+               300
             ],
             "scale":[2,2],
             "rotation":0
@@ -91,12 +91,12 @@
       },
            {
          "type":"Actor",
-         "prototype":true,
+
          "name": "Coin",
          "tag":"Pickup",
          "transform":{
             "position":[
-               200,
+               300,
                300
             ],
             "scale":[1,1],
@@ -116,7 +116,7 @@
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
-               "data.isSensor":true,
+               "data.isSensor":false,
                "data.density":1,
                "data.lockAngle":true,
                "data.restitution":0,
@@ -131,7 +131,7 @@
          "transform":{
             "position":[
                400,
-               590
+               400
             ]
          },
          "components":[
@@ -146,6 +146,62 @@
                "data.size":[
                   800,
                   20
+               ]
+            }
+         ]
+      },
+       {
+         "type":"Actor",
+         "name":"tile01",
+         "prototype":true,
+         "tag":"Ground",
+         "transform":{
+            "scale":[
+               2,
+               2
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"Textures/miscTexture.png",
+               "rect":[416, 128, 32, 32]
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":false,
+               "data.density":1,
+               "data.size":[
+                  64,
+                  64
+               ]
+            }
+         ]
+      },
+       {
+         "type":"Actor",
+         "name":"tile02",
+         "prototype":true,
+         "tag":"Ground",
+         "transform":{
+            "position":[
+               2,
+               2
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"Textures/miscTexture.png",
+               "rect":[352, 32, 32, 32]
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":false,
+               "data.density":1,
+               "data.size":[
+                  64,
+                  64
                ]
             }
          ]

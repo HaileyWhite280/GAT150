@@ -22,14 +22,24 @@ void Game::Initialize()
     nc::SetFilePath("../Resources");
 
     rapidjson::Document document;
-    nc::json::Load("scene.txt", document);
+    bool success = nc::json::Load("scene.txt", document);
     scene->Read(document);
+    assert(success);
 
-    for (int i = 0; i < 10; i++) {
-        auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin");
-        actor->transform.position = nc::Vector2{ nc::RandomRange(0,800), nc::RandomRange(400,500) };
-        scene->AddActor(std::move(actor));
-    }
+    nc::TileMap tilemap;
+    tilemap.scene = scene.get();
+
+    success = nc::json::Load("map.txt", document);
+    assert(success);
+    tilemap.Read(document);
+    tilemap.Create();
+
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("Bat");
+    //    actor->transform.position = nc::Vector2{ nc::RandomRange(0,800), nc::RandomRange(400,500) };
+    //    scene->AddActor(std::move(actor));
+    //}
 }
 
 void Game::Shutdown()

@@ -126,6 +126,9 @@
     <ClCompile Include="Component\TextComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Object\TileMap.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -245,9 +248,15 @@
     <ClInclude Include="Component\TextComponent.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Object\TileMap.h">
+      <Filter>Source Files\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Resources\scene.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Resources\map.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

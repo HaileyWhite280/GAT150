@@ -30,6 +30,7 @@
 //Objects
 #include "Object/Actor.h"
 #include "Object/Scene.h"
+#include "Object/TileMap.h"
 
 //input
 #include "Input/InputSystem.h"

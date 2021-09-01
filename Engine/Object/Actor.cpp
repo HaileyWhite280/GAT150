@@ -11,7 +11,7 @@ namespace nc
 		transform = other.transform;
 		scene = other.scene;
 
-		for (auto& component : components)
+		for (auto& component : other.components)
 		{
 			auto clone = std::unique_ptr<Component>(dynamic_cast<Component*>(component->Clone().release()));
 			clone->owner = this;
