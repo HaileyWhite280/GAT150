@@ -4,18 +4,23 @@
          "type":"Actor",
          "name":"Player",
          "tag":"Player",
+         "prototype":true,
          "transform":{
             "position":[
                300,
-               250
+               300
             ],
-            "scale":[2,2],
+            "scale":[
+               2,
+               2
+            ],
             "rotation":0
          },
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":15
+               "speed":15,
+               "jump":400
             },
             {
                "type":"SpriteAnimationComponent",
@@ -23,47 +28,66 @@
                "fps":10,
                "numFramesX":18,
                "numFramesY":11,
-               "startFrame": 90,
-               "endFrame": 95,
-               "sequences":
-               [     
-               {"name": "idle", "sequence.fps": 10, "sequence.startFrame": 0,"sequence.endFrame": 1},
-               {"name": "walk_left", "sequence.fps": 10, "sequence.startFrame": 90,"sequence.endFrame": 95},
-               {"name": "walk_right", "sequence.fps": 10, "sequence.startFrame": 162,"sequence.endFrame": 167}
+               "startFrame":90,
+               "endFrame":95,
+               "sequences":[
+                  {
+                     "name":"idle",
+                     "sequence.fps":10,
+                     "sequence.startFrame":0,
+                     "sequence.endFrame":1
+                  },
+                  {
+                     "name":"walk_left",
+                     "sequence.fps":10,
+                     "sequence.startFrame":90,
+                     "sequence.endFrame":95
+                  },
+                  {
+                     "name":"walk_right",
+                     "sequence.fps":10,
+                     "sequence.startFrame":162,
+                     "sequence.endFrame":167
+                  }
                ],
-               "defaultSequence": "idle"
+               "defaultSequence":"idle"
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
-               "data.density":0.5,
+               "data.density":1,
                "data.lockAngle":true,
                "data.restitution":0.1,
-               "data.gravityScale":0.5,
-               "data.size":[32,64]
+               "data.gravityScale":1,
+               "data.size":[
+                  32,
+                  32
+               ]
             },
             {
-	            "type":"AudioComponent",
-	            "soundName":"Audio/hurt.wav",
-                "volume":1,
-                "pitch":1,
-                "loop":false,
-	            "playOnAwake":false
+               "type":"AudioComponent",
+               "soundName":"Audio/hurt.wav",
+               "volume":1,
+               "pitch":1,
+               "loop":false,
+               "playOnAwake":false
             }
-            
          ]
       },
-            {
+      {
          "type":"Actor",
          "prototype":true,
-         "name": "Bat",
+         "name":"Bat",
          "tag":"Enemy",
          "transform":{
             "position":[
-               300,
-               300
+               500,
+               500
             ],
-            "scale":[2,2],
+            "scale":[
+               2,
+               2
+            ],
             "rotation":0
          },
          "components":[
@@ -85,21 +109,27 @@
                "data.lockAngle":true,
                "data.restitution":0.1,
                "data.gravityScale":0,
-               "data.size":[64,64]
+               "data.size":[
+                  64,
+                  64
+               ]
             }
          ]
       },
-           {
+      {
          "type":"Actor",
-
-         "name": "Coin",
+         "name":"Coin",
+         "prototype":true,
          "tag":"Pickup",
          "transform":{
             "position":[
                300,
                300
             ],
-            "scale":[1,1],
+            "scale":[
+               1,
+               1
+            ],
             "rotation":0
          },
          "components":[
@@ -121,7 +151,10 @@
                "data.lockAngle":true,
                "data.restitution":0,
                "data.gravityScale":0,
-               "data.size":[16,32]
+               "data.size":[
+                  16,
+                  32
+               ]
             }
          ]
       },
@@ -131,7 +164,7 @@
          "transform":{
             "position":[
                400,
-               400
+               450
             ]
          },
          "components":[
@@ -150,35 +183,40 @@
             }
          ]
       },
-       {
+      {
          "type":"Actor",
          "name":"tile01",
          "prototype":true,
          "tag":"Ground",
          "transform":{
             "scale":[
-               2,
-               2
+               3,
+               3
             ]
          },
          "components":[
             {
                "type":"SpriteComponent",
                "textureName":"Textures/miscTexture.png",
-               "rect":[416, 128, 32, 32]
+               "rect":[
+                  416,
+                  128,
+                  32,
+                  32
+               ]
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":false,
                "data.density":1,
                "data.size":[
-                  64,
-                  64
+                  32,
+                  32
                ]
             }
          ]
       },
-       {
+      {
          "type":"Actor",
          "name":"tile02",
          "prototype":true,
@@ -193,41 +231,23 @@
             {
                "type":"SpriteComponent",
                "textureName":"Textures/miscTexture.png",
-               "rect":[352, 32, 32, 32]
+               "rect":[
+                  352,
+                  32,
+                  32,
+                  32
+               ]
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":false,
                "data.density":1,
                "data.size":[
-                  64,
-                  64
+                  32,
+                  32
                ]
             }
          ]
-      },
-            		{
-			"type":"Actor",
-			"name":"Score",
-			"transform":{
-				"position":[
-					60,
-					20
-				]
-			},
-			"components":[
-				{
-					"type":"TextComponent",
-					"fontName":"fonts/ka1.ttf",
-					"fontSize":16,
-					"color":[
-						1,
-						1,
-						1
-					],
-					"text":"Hello World!"
-				}
-			]
-		}
+      }
    ]
 }

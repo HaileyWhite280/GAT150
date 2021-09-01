@@ -7,17 +7,13 @@ class Game
 public:
 	enum class eState
 	{
+		Reset,
 		Title,
 		StartGame,
-		StartLevel1,
-		StartLevel2,
-		StartLevelBoss,
-		PlayLevel1,
-		PlayLevel2,
-		PlayLevelBoss,
-		Game,
-		GameOver,
-		GameDone
+		StartLevel,
+		Level,
+		PlayerDead,
+		GameOver
 	};
 
 public:
@@ -30,13 +26,15 @@ public:
 	bool IsQuit() { return quit; }
 
 private:
-	void UpdateTitle(float dt);
-	void UpdateLevelStart(float dt);
-	void UpdateLevel2Start(float dt);
-	void UpdateLevelBossStart(float dt);
+	void Reset();
+	void Title();
+	void StartGame();
+	void StartLevel();
+	void Level();
+	void PlayerDead();
+	void GameOver();
 
-	void OnAddPoints(const nc::Event& event);
-	void OnPlayerDead(const nc::Event& event);
+	void OnAddScore(const nc::Event& event);
 
 public:
 	std::unique_ptr<nc::Engine> engine;
@@ -44,11 +42,13 @@ public:
 
 private:
 	bool quit = false;
-	eState state = eState::Title;
-	float stateTimer = 0.0f;
+	eState state = eState::Reset;
 
-	size_t score = 0;
-	size_t lives = 0;
+	float stateTimer = 0;
+	float spawnTimer = 0;
+
+	int score = 0;
+	int lives = 0;
 
 	nc::AudioChannel musicChannel;
 	std::shared_ptr<nc::Texture> texture;

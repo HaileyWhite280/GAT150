@@ -16,7 +16,7 @@ namespace nc
 				int x = i % numTilesX;
 				int y = i / numTilesX;
 
-				actor->transform.position = (nc::Vector2{ x, y } *size); //start + (vector2)
+				actor->transform.position = start + (nc::Vector2{ x, y } *size);
 				scene->AddActor(std::move(actor));
 			}
 		}
