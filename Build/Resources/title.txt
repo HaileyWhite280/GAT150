@@ -1,5 +1,27 @@
 {
    "actors":[
+   {
+         "type":"Actor",
+         "name":"background",
+         "transform":{
+            "position":[
+               400,
+               300
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"Textures/Background.png",
+               "rect":[
+                  352,
+                  32,
+                  800,
+                  600
+               ]
+            }
+         ]
+      },
       {
          "type":"Actor",
          "name":"Score",
@@ -19,7 +41,7 @@
                   1,
                   1
                ],
-               "text":"Hello World!"
+               "text":"Heyo"
             }
          ]
       },
@@ -43,28 +65,6 @@
                   1
                ],
                "text":"Escape"
-            }
-         ]
-      },
-      {
-         "type":"Actor",
-         "name":"background",
-         "transform":{
-            "position":[
-               400,
-               300
-            ]
-         },
-         "components":[
-            {
-               "type":"SpriteComponent",
-               "textureName":"Textures/Background.png",
-               "rect":[
-                  352,
-                  32,
-                  32,
-                  32
-               ]
             }
          ]
       }

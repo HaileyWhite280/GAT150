@@ -123,7 +123,7 @@ void Game::StartGame()
 
     nc::TileMap tilemap;
     tilemap.scene = scene.get();
-    success = nc::json::Load("map.txt", document);
+    success = nc::json::Load("map3.txt", document);
     assert(success);
     tilemap.Read(document);
     tilemap.Create();
@@ -151,14 +151,14 @@ void Game::Level()
     spawnTimer -= engine->time.deltaTime;
 
     //randomly spawn coins
-    //if (spawnTimer <= 0)
-    //{
-    //    spawnTimer = nc::RandomRange(2, 4);
+    if (spawnTimer <= 0)
+    {
+        spawnTimer = nc::RandomRange(2, 4);
 
-    //    auto coin = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin");
-    //    coin->transform.position = { nc::RandomRange(100, 700), 150.0f };
-    //    scene->AddActor(std::move(coin));
-    //}
+        auto coin = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin");
+        coin->transform.position = { nc::RandomRange(100, 700), nc::RandomRange(100, 500) };
+        scene->AddActor(std::move(coin));
+    }
 }
 
 void Game::PlayerDead()

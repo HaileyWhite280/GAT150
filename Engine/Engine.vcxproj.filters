@@ -256,10 +256,19 @@
     <Text Include="..\Build\Resources\scene.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="..\Build\Resources\map.txt">
+    <Text Include="..\Build\Resources\map1.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="..\Build\Resources\title.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Resources\map3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Resources\map4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Build\Resources\map2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
