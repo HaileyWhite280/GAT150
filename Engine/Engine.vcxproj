@@ -243,12 +243,15 @@
     <ClInclude Include="Resource\ResourceSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Resources\map1.txt" />
-    <Text Include="..\Build\Resources\map2.txt" />
-    <Text Include="..\Build\Resources\map3.txt" />
-    <Text Include="..\Build\Resources\map4.txt" />
-    <Text Include="..\Build\Resources\scene.txt" />
-    <Text Include="..\Build\Resources\title.txt" />
+    <Text Include="..\Build\Resources\Json\blocks.txt" />
+    <Text Include="..\Build\Resources\Json\gameOver.txt" />
+    <Text Include="..\Build\Resources\Json\map1.txt" />
+    <Text Include="..\Build\Resources\Json\map2.txt" />
+    <Text Include="..\Build\Resources\Json\map3.txt" />
+    <Text Include="..\Build\Resources\Json\map4.txt" />
+    <Text Include="..\Build\Resources\Json\scene.txt" />
+    <Text Include="..\Build\Resources\Json\score.txt" />
+    <Text Include="..\Build\Resources\Json\title.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

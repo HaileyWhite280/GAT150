@@ -1,0 +1,27 @@
+{
+"actors":[
+{
+         "type":"Actor",
+         "name":"GameOver",
+         "transform":{
+            "position":[
+               370,
+               300
+            ]
+         },
+         "components":[
+            {
+               "type":"TextComponent",
+               "fontName":"fonts/ka1.ttf",
+               "fontSize":16,
+               "color":[
+                  1,
+                  0,
+                  0
+               ],
+               "text":"Game Over"
+            }
+         ]
+      }
+]
+}

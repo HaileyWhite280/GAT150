@@ -35,6 +35,7 @@ private:
 	void GameOver();
 
 	void OnAddScore(const nc::Event& event);
+	float GetTimer();
 
 public:
 	std::unique_ptr<nc::Engine> engine;
@@ -46,9 +47,9 @@ private:
 
 	float stateTimer = 0;
 	float spawnTimer = 0;
+	float gameTimer = 0;
 
 	int score = 0;
-	int lives = 0;
 
 	nc::AudioChannel musicChannel;
 	std::shared_ptr<nc::Texture> texture;

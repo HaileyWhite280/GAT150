@@ -60,6 +60,10 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
 	}
 
+	if (istring_compare(actor->tag, "Water")) {
+		contacts.push_back(actor);
+	}
+
 	//if (istring_compare(actor->tag, "pickup")) {
 	//	owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
 	//	actor->destroy = true;
